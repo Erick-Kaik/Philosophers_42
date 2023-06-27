@@ -1,0 +1,159 @@
+
+██████╗ ██╗  ██╗██╗██╗      █████╗  ██████╗ █████╗ ██████╗ ██╗  ██╗███████╗██████╗  ██████╗
+██╔══██╗██║  ██║██║██║     ██╔══██╗██╔════╝██╔══██╗██╔══██╗██║  ██║██╔════╝██╔══██╗██╔════╝
+██████╔╝███████║██║██║     ██║  ██║╚█████╗ ██║  ██║██████╔╝███████║█████╗  ██████╔╝╚█████╗
+██╔═══╝ ██╔══██║██║██║     ██║  ██║ ╚═══██╗██║  ██║██╔═══╝ ██╔══██║██╔══╝  ██╔══██╗ ╚═══██╗
+██║     ██║  ██║██║███████╗╚█████╔╝██████╔╝╚█████╔╝██║     ██║  ██║███████╗██║  ██║██████╔╝
+╚═╝     ╚═╝  ╚═╝╚═╝╚══════╝ ╚════╝ ╚═════╝ ╚════╝ ╚═╝     ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═════╝
+
+
+           ██╗   ██╗██╗ ██████╗ █████╗  █████╗    ██████╗ ███████╗██████╗  █████╗ ██╗
+           ██║   ██║██║██╔════╝██╔══██╗██╔══██╗  ██╔════╝ ██╔════╝██╔══██╗██╔══██╗██║
+           ╚██╗ ██╔╝██║╚█████╗ ███████║██║  ██║  ██║  ██╗ █████╗  ██████╔╝███████║██║
+            ╚████╔╝ ██║ ╚═══██╗██╔══██║██║  ██║  ██║  ╚██╗██╔══╝  ██╔══██╗██╔══██║██║
+             ╚██╔╝  ██║██████╔╝██║  ██║╚█████╔╝  ╚██████╔╝███████╗██║  ██║██║  ██║███████╗
+              ╚═╝   ╚═╝╚═════╝ ╚═╝  ╚═╝ ╚════╝    ╚═════╝ ╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝
+
+Aqui estão as coisas que você precisa saber se quiser ter sucesso nesta tarefa:
+• Um ou mais filósofos sentam-se a uma mesa redonda. Há uma grande tigela de espaguete no meio da mesa.
+• Os filósofos alternadamente comem, pensam ou dormem.
+	· Enquanto comem, não pensam nem dormem;
+	· enquanto pensam, não comem nem dormem;
+	· E, claro, enquanto dormem, não estão comendo nem pensando
+• Também há garfo (fork) na mesa. Existem tantas bifurcações quanto filósofos.
+• Como servir e comer espaguete com apenas um garfo (fork) é muito inconveniente, um filósofo pega o garfo(fork) direito e o garfo(fork) esquerdo para comer, um em cada mão.
+• Quando um filósofo termina de comer, ele coloca os garfos(fork) de volta na mesa e começa a dormir. Uma vez acordados, eles começam a pensar novamente. A simulação para quando um filósofo morre de fome.
+• Todo filósofo precisa comer e nunca deve passar fome.
+• Os filósofos não se falam.
+• Os filósofos não sabem se outro filósofo está prestes a morrer.
+• Não é preciso dizer que os filósofos devem evitar a morte!
+
+
+           ██████╗ ███████╗ ██████╗ ██████╗  █████╗  ██████╗   ██████╗ ██╗      █████╗ ██████╗  █████╗ ██╗ ██████╗
+           ██╔══██╗██╔════╝██╔════╝ ██╔══██╗██╔══██╗██╔════╝  ██╔════╝ ██║     ██╔══██╗██╔══██╗██╔══██╗██║██╔════╝
+           ██████╔╝█████╗  ██║  ██╗ ██████╔╝███████║╚█████╗   ██║  ██╗ ██║     ██║  ██║██████╦╝███████║██║╚█████╗
+           ██╔══██╗██╔══╝  ██║  ╚██╗██╔══██╗██╔══██║ ╚═══██╗  ██║  ╚██╗██║     ██║  ██║██╔══██╗██╔══██║██║ ╚═══██╗
+           ██║  ██║███████╗╚██████╔╝██║  ██║██║  ██║██████╔╝  ╚██████╔╝███████╗╚█████╔╝██████╦╝██║  ██║██║██████╔╝
+           ╚═╝  ╚═╝╚══════╝ ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═════╝    ╚═════╝ ╚══════╝ ╚════╝ ╚═════╝ ╚═╝  ╚═╝╚═╝╚═════╝
+
+Você tem que escrever um programa para a parte obrigatória e outro para a parte bônus (se você decidir fazer a parte bônus). Ambos devem cumprir as seguintes regras:
+
+• Variáveis globais são proibidas!
+• Seu(s) programa(s) deve(m) ter os seguintes argumentos: number_of_philosophers time_to_die time_to_eat time_to_sleep [number_of_times_each_philosopher_must_eat]
+	· number_of_philosophers: O número de filósofos e também o número de garfos(forks).
+	· time_to_die (em milissegundos): Se um filósofo não começar a comer time_to_die milissegundos desde o início de sua última refeição ou o início da simulação, ele morre.
+	· time_to_eat (em milissegundos): O tempo que um filósofo leva para comer. Durante esse tempo, eles precisarão segurar dois garfos(forks).
+	· time_to_sleep (em milissegundos): O tempo que um filósofo passará dormindo.
+	· number_of_times_each_philosopher_must_eat (argumento opcional): Se todos os filósofos tiverem comido pelo menos number_of_times_each_philosopher_must_eat vezes, a simulação para. Se não for especificado, a simulação para quando um filósofo morre.
+• Cada filósofo tem um número que varia de 1 a number_of_philosophers.
+• O filósofo número 1 senta-se ao lado do filósofo número number_of_philosophers. Qualquer outro filósofo número N fica entre o filósofo número N - 1 e o filósofo número N + 1.
+
+Sobre os logs do seu programa:
+• Qualquer mudança de estado de um filósofo deve ser formatada da seguinte forma:
+	· timestamp_in_ms X tomou uma bifurcação
+	· timestamp_in_ms X está comendo
+	· timestamp_in_ms X está dormindo
+	· timestamp_in_ms X está pensando
+	· timestamp_in_ms X morreu
+Substitua timestamp_in_ms pelo timestamp atual em milissegundos e X pelo número do filósofo.
+• Uma mensagem de estado exibida não deve ser confundida com outra mensagem.
+• Uma mensagem anunciando a morte de um filósofo deve ser exibida não mais que 10 ms após a morte real do filósofo.
+• Mais uma vez, os filósofos devem evitar morrer!
+
+
+           ██████╗  █████╗ ██████╗ ████████╗███████╗
+           ██╔══██╗██╔══██╗██╔══██╗╚══██╔══╝██╔════╝
+           ██████╔╝███████║██████╔╝   ██║   █████╗
+           ██╔═══╝ ██╔══██║██╔══██╗   ██║   ██╔══╝
+           ██║     ██║  ██║██║  ██║   ██║   ███████╗
+           ╚═╝     ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝   ╚══════╝
+
+                      █████╗ ██████╗ ██████╗ ██╗ ██████╗  █████╗ ████████╗ █████╗ ██████╗ ██╗ █████╗
+                     ██╔══██╗██╔══██╗██╔══██╗██║██╔════╝ ██╔══██╗╚══██╔══╝██╔══██╗██╔══██╗██║██╔══██╗
+                     ██║  ██║██████╦╝██████╔╝██║██║  ██╗ ███████║   ██║   ██║  ██║██████╔╝██║███████║
+                     ██║  ██║██╔══██╗██╔══██╗██║██║  ╚██╗██╔══██║   ██║   ██║  ██║██╔══██╗██║██╔══██║
+                     ╚█████╔╝██████╦╝██║  ██║██║╚██████╔╝██║  ██║   ██║   ╚█████╔╝██║  ██║██║██║  ██║
+                      ╚════╝ ╚═════╝ ╚═╝  ╚═╝╚═╝ ╚═════╝ ╚═╝  ╚═╝   ╚═╝    ╚════╝ ╚═╝  ╚═╝╚═╝╚═╝  ╚═╝
+
+Aquivos devem estar dentro da pasta
+• philo/
+
+Nome do programa
+• philo
+
+Não é permitido o uso da Libft
+
+Argumentos:
+	· number_of_philosophers
+	· time_to_die time_to_eat
+	· time_to_sleep
+	· number_of_times_each_philosopher_must_eat (opcional)
+
+Funções Permitidas:
+	· memset
+	· printf
+	· malloc
+	· free
+	· write
+	· usleep
+	· gettimeofday
+	· pthread_create
+	· pthread_detach
+	· pthread_join
+	· pthread_mutex_init
+	· pthread_mutex_destroy
+	· pthread_mutex_lock
+	· pthread_mutex_unlock
+
+As regras específicas para a parte obrigatória são:
+• Cada filósofo deve ser um fio.
+• Existe uma bifurcação entre cada par de filósofos. Portanto, se houver vários filósofos, cada filósofo tem uma bifurcação no lado esquerdo e uma bifurcação no lado direito. Se houver apenas um filósofo, deve haver apenas um garfo na mesa.
+• Para evitar que os filósofos dupliquem forks, você deve proteger o estado dos forks com um mutex para cada um deles.
+
+
+           ██████╗  █████╗ ██████╗ ████████╗███████╗  ██████╗  █████╗ ███╗  ██╗██╗   ██╗ ██████╗
+           ██╔══██╗██╔══██╗██╔══██╗╚══██╔══╝██╔════╝  ██╔══██╗██╔══██╗████╗ ██║██║   ██║██╔════╝
+           ██████╔╝███████║██████╔╝   ██║   █████╗    ██████╦╝██║  ██║██╔██╗██║██║   ██║╚█████╗
+           ██╔═══╝ ██╔══██║██╔══██╗   ██║   ██╔══╝    ██╔══██╗██║  ██║██║╚████║██║   ██║ ╚═══██╗
+           ██║     ██║  ██║██║  ██║   ██║   ███████╗  ██████╦╝╚█████╔╝██║ ╚███║╚██████╔╝██████╔╝
+           ╚═╝     ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝   ╚══════╝  ╚═════╝  ╚════╝ ╚═╝  ╚══╝ ╚═════╝ ╚═════╝
+
+Aquivos devem estar dentro da pasta
+• philo_bonus/
+
+Nome do programa
+• philo_bonus
+
+Não é permitido o uso da Libft
+
+Argumentos:
+	· number_of_philosophers
+	· time_to_die time_to_eat
+	· time_to_sleep
+	· number_of_times_each_philosopher_must_eat (opcional)
+
+Funções Permitidas:
+	· memset
+	· printf
+	· malloc
+	· free
+	· write
+	· fork
+	· kill
+	· exit
+	· pthread_create
+	· pthread_detach
+	· pthread_join
+	· usleep
+	· gettimeofday
+	· waitpid
+	· sem_open
+	· sem_close
+	· sem_post
+	· sem_wait
+	· sem_unlink
+
+O programa da parte bônus leva os mesmos argumentos do programa obrigatório. Tem de cumprir os requisitos do capítulo Regras globais. As regras específicas para a parte bônus são:
+• Todos os garfos são colocados no meio da mesa.
+• Eles não têm estados na memória, mas o número de forks disponíveis é representado por um semáforo.
+• Cada filósofo deve ser um processo. Mas o processo principal não deve ser um filósofo
