@@ -6,7 +6,15 @@
 /*   By: ekaik-ne <ekaik-ne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 09:59:04 by ekaik-ne          #+#    #+#             */
-/*   Updated: 2023/06/27 09:59:06 by ekaik-ne         ###   ########.fr       */
+/*   Updated: 2023/06/28 16:43:38 by ekaik-ne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "philosophers.h"
+
+int	main(int argc, char **argv)
+{
+	if (ft_check_error_size_argc(argc) == 1)
+		return (1);
+	(void)argv;
+}
