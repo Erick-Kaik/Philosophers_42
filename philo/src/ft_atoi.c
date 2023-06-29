@@ -1,28 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ekaik-ne <ekaik-ne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/27 09:59:04 by ekaik-ne          #+#    #+#             */
-/*   Updated: 2023/06/29 18:14:18 by ekaik-ne         ###   ########.fr       */
+/*   Created: 2023/06/29 10:09:40 by ekaik-ne          #+#    #+#             */
+/*   Updated: 2023/06/29 12:57:23 by ekaik-ne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int	main(int argc, char **argv)
+int	ft_atoi(const char *str)
 {
-	t_philo	philosophers;
+	int		x;
+	int		y;
+	int		value;
+	char	*temp;
 
-	if (ft_check_error_size_argc(argc) == 1 || ft_check_args(argc, argv) == 1)
-		return (1);
-	ft_pull_args(argc, argv, &philosophers);
-	ft_philo_init(&philosophers);
-}
-
-void	ft_philo_init(t_philo *philo)
-{
-
+	x = 0;
+	y = 1;
+	value = 0;
+	temp = (char *)str;
+	if (str == NULL)
+		return (0);
+	while ((temp[x] >= '\t' && temp[x] <= '\r') || temp[x] == ' ')
+			x++;
+	if (temp[x] == '-' || temp[x] == '+')
+	{
+		if (temp[x] == '-')
+				y *= -1;
+		x++;
+	}
+	while (temp[x] >= '0' && temp[x] <= '9')
+	{
+			value = (value * 10) + temp[x] - '0';
+			x++;
+	}
+	return (value * y);
 }

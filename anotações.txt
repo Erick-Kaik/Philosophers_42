@@ -8,12 +8,12 @@ https://cdn.intra.42.fr/pdf/pdf/66286/en.subject.pdf
 ╚═╝     ╚═╝  ╚═╝╚═╝╚══════╝ ╚════╝ ╚═════╝ ╚════╝ ╚═╝     ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═════╝
 
 
-           ██╗   ██╗██╗ ██████╗ █████╗  █████╗    ██████╗ ███████╗██████╗  █████╗ ██╗
-           ██║   ██║██║██╔════╝██╔══██╗██╔══██╗  ██╔════╝ ██╔════╝██╔══██╗██╔══██╗██║
-           ╚██╗ ██╔╝██║╚█████╗ ███████║██║  ██║  ██║  ██╗ █████╗  ██████╔╝███████║██║
-            ╚████╔╝ ██║ ╚═══██╗██╔══██║██║  ██║  ██║  ╚██╗██╔══╝  ██╔══██╗██╔══██║██║
-             ╚██╔╝  ██║██████╔╝██║  ██║╚█████╔╝  ╚██████╔╝███████╗██║  ██║██║  ██║███████╗
-              ╚═╝   ╚═╝╚═════╝ ╚═╝  ╚═╝ ╚════╝    ╚═════╝ ╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝
+				██╗   ██╗██╗ ██████╗ █████╗  █████╗    ██████╗ ███████╗██████╗  █████╗ ██╗
+				██║   ██║██║██╔════╝██╔══██╗██╔══██╗  ██╔════╝ ██╔════╝██╔══██╗██╔══██╗██║
+				╚██╗ ██╔╝██║╚█████╗ ███████║██║  ██║  ██║  ██╗ █████╗  ██████╔╝███████║██║
+				 ╚████╔╝ ██║ ╚═══██╗██╔══██║██║  ██║  ██║  ╚██╗██╔══╝  ██╔══██╗██╔══██║██║
+				  ╚██╔╝  ██║██████╔╝██║  ██║╚█████╔╝  ╚██████╔╝███████╗██║  ██║██║  ██║███████╗
+				   ╚═╝   ╚═╝╚═════╝ ╚═╝  ╚═╝ ╚════╝    ╚═════╝ ╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝
 
 Aqui estão as coisas que você precisa saber se quiser ter sucesso nesta tarefa:
 • Um ou mais filósofos sentam-se a uma mesa redonda. Há uma grande tigela de espaguete no meio da mesa.
@@ -21,7 +21,7 @@ Aqui estão as coisas que você precisa saber se quiser ter sucesso nesta tarefa
 	· Enquanto comem, não pensam nem dormem;
 	· enquanto pensam, não comem nem dormem;
 	· E, claro, enquanto dormem, não estão comendo nem pensando
-• Também há garfo na mesa. Existem tantas bifurcações quanto filósofos.
+• Também há garfo na mesa. Existem tantas garfos quanto filósofos.
 • Como servir e comer espaguete com apenas um garfo é muito inconveniente, um filósofo pega o garfo direito e o garfo esquerdo para comer, um em cada mão.
 • Quando um filósofo termina de comer, ele coloca os garfos de volta na mesa e começa a dormir. Uma vez acordados, eles começam a pensar novamente. A simulação para quando um filósofo morre de fome.
 • Todo filósofo precisa comer e nunca deve passar fome.
@@ -30,12 +30,12 @@ Aqui estão as coisas que você precisa saber se quiser ter sucesso nesta tarefa
 • Não é preciso dizer que os filósofos devem evitar a morte!
 
 
-           ██████╗ ███████╗ ██████╗ ██████╗  █████╗  ██████╗   ██████╗ ██╗      █████╗ ██████╗  █████╗ ██╗ ██████╗
-           ██╔══██╗██╔════╝██╔════╝ ██╔══██╗██╔══██╗██╔════╝  ██╔════╝ ██║     ██╔══██╗██╔══██╗██╔══██╗██║██╔════╝
-           ██████╔╝█████╗  ██║  ██╗ ██████╔╝███████║╚█████╗   ██║  ██╗ ██║     ██║  ██║██████╦╝███████║██║╚█████╗
-           ██╔══██╗██╔══╝  ██║  ╚██╗██╔══██╗██╔══██║ ╚═══██╗  ██║  ╚██╗██║     ██║  ██║██╔══██╗██╔══██║██║ ╚═══██╗
-           ██║  ██║███████╗╚██████╔╝██║  ██║██║  ██║██████╔╝  ╚██████╔╝███████╗╚█████╔╝██████╦╝██║  ██║██║██████╔╝
-           ╚═╝  ╚═╝╚══════╝ ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═════╝    ╚═════╝ ╚══════╝ ╚════╝ ╚═════╝ ╚═╝  ╚═╝╚═╝╚═════╝
+				██████╗ ███████╗ ██████╗ ██████╗  █████╗  ██████╗   ██████╗ ██╗      █████╗ ██████╗  █████╗ ██╗ ██████╗
+				██╔══██╗██╔════╝██╔════╝ ██╔══██╗██╔══██╗██╔════╝  ██╔════╝ ██║     ██╔══██╗██╔══██╗██╔══██╗██║██╔════╝
+				██████╔╝█████╗  ██║  ██╗ ██████╔╝███████║╚█████╗   ██║  ██╗ ██║     ██║  ██║██████╦╝███████║██║╚█████╗
+				██╔══██╗██╔══╝  ██║  ╚██╗██╔══██╗██╔══██║ ╚═══██╗  ██║  ╚██╗██║     ██║  ██║██╔══██╗██╔══██║██║ ╚═══██╗
+				██║  ██║███████╗╚██████╔╝██║  ██║██║  ██║██████╔╝  ╚██████╔╝███████╗╚█████╔╝██████╦╝██║  ██║██║██████╔╝
+				╚═╝  ╚═╝╚══════╝ ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═════╝    ╚═════╝ ╚══════╝ ╚════╝ ╚═════╝ ╚═╝  ╚═╝╚═╝╚═════╝
 
 Você tem que escrever um programa para a parte obrigatória e outro para a parte bônus (se você decidir fazer a parte bônus). Ambos devem cumprir as seguintes regras:
 
@@ -45,13 +45,13 @@ Você tem que escrever um programa para a parte obrigatória e outro para a part
 	· time_to_die (em milissegundos): Se um filósofo não começar a comer time_to_die milissegundos desde o início de sua última refeição ou o início da simulação, ele morre.
 	· time_to_eat (em milissegundos): O tempo que um filósofo leva para comer. Durante esse tempo, eles precisarão segurar dois garfos.
 	· time_to_sleep (em milissegundos): O tempo que um filósofo passará dormindo.
-	· number_of_times_each_philosopher_must_eat (argumento opcional): Se todos os filósofos tiverem comido pelo menos number_of_times_each_philosopher_must_eat vezes, a simulação para. Se não for especificado, a simulação para quando um filósofo morre.
+	· 	 (argumento opcional): Se todos os filósofos tiverem comido pelo menos number_of_times_each_philosopher_must_eat vezes, a simulação para. Se não for especificado, a simulação para quando um filósofo morre.
 • Cada filósofo tem um número que varia de 1 a number_of_philosophers.
 • O filósofo número 1 senta-se ao lado do filósofo número number_of_philosophers. Qualquer outro filósofo número N fica entre o filósofo número N - 1 e o filósofo número N + 1.
 
 Sobre os logs do seu programa:
 • Qualquer mudança de estado de um filósofo deve ser formatada da seguinte forma:
-	· timestamp_in_ms X tomou uma bifurcação
+	· timestamp_in_ms X tomou uma garfo
 	· timestamp_in_ms X está comendo
 	· timestamp_in_ms X está dormindo
 	· timestamp_in_ms X está pensando
@@ -62,18 +62,18 @@ Substitua timestamp_in_ms pelo timestamp atual em milissegundos e X pelo número
 • Mais uma vez, os filósofos devem evitar morrer!
 
 
-           ██████╗  █████╗ ██████╗ ████████╗███████╗
-           ██╔══██╗██╔══██╗██╔══██╗╚══██╔══╝██╔════╝
-           ██████╔╝███████║██████╔╝   ██║   █████╗
-           ██╔═══╝ ██╔══██║██╔══██╗   ██║   ██╔══╝
-           ██║     ██║  ██║██║  ██║   ██║   ███████╗
-           ╚═╝     ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝   ╚══════╝
-                      █████╗ ██████╗ ██████╗ ██╗ ██████╗  █████╗ ████████╗ █████╗ ██████╗ ██╗ █████╗
-                     ██╔══██╗██╔══██╗██╔══██╗██║██╔════╝ ██╔══██╗╚══██╔══╝██╔══██╗██╔══██╗██║██╔══██╗
-                     ██║  ██║██████╦╝██████╔╝██║██║  ██╗ ███████║   ██║   ██║  ██║██████╔╝██║███████║
-                     ██║  ██║██╔══██╗██╔══██╗██║██║  ╚██╗██╔══██║   ██║   ██║  ██║██╔══██╗██║██╔══██║
-                     ╚█████╔╝██████╦╝██║  ██║██║╚██████╔╝██║  ██║   ██║   ╚█████╔╝██║  ██║██║██║  ██║
-                      ╚════╝ ╚═════╝ ╚═╝  ╚═╝╚═╝ ╚═════╝ ╚═╝  ╚═╝   ╚═╝    ╚════╝ ╚═╝  ╚═╝╚═╝╚═╝  ╚═╝
+				██████╗  █████╗ ██████╗ ████████╗███████╗
+				██╔══██╗██╔══██╗██╔══██╗╚══██╔══╝██╔════╝
+				██████╔╝███████║██████╔╝   ██║   █████╗
+				██╔═══╝ ██╔══██║██╔══██╗   ██║   ██╔══╝
+				██║     ██║  ██║██║  ██║   ██║   ███████╗
+				╚═╝     ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝   ╚══════╝
+						 █████╗ ██████╗ ██████╗ ██╗ ██████╗  █████╗ ████████╗ █████╗ ██████╗ ██╗ █████╗
+						██╔══██╗██╔══██╗██╔══██╗██║██╔════╝ ██╔══██╗╚══██╔══╝██╔══██╗██╔══██╗██║██╔══██╗
+						██║  ██║██████╦╝██████╔╝██║██║  ██╗ ███████║   ██║   ██║  ██║██████╔╝██║███████║
+						██║  ██║██╔══██╗██╔══██╗██║██║  ╚██╗██╔══██║   ██║   ██║  ██║██╔══██╗██║██╔══██║
+						╚█████╔╝██████╦╝██║  ██║██║╚██████╔╝██║  ██║   ██║   ╚█████╔╝██║  ██║██║██║  ██║
+						 ╚════╝ ╚═════╝ ╚═╝  ╚═╝╚═╝ ╚═════╝ ╚═╝  ╚═╝   ╚═╝    ╚════╝ ╚═╝  ╚═╝╚═╝╚═╝  ╚═╝
 
 Aquivos devem estar dentro da pasta
 • philo/
@@ -85,7 +85,8 @@ Não é permitido o uso da Libft
 
 Argumentos:
 	· number_of_philosophers
-	· time_to_die time_to_eat
+	· time_to_die
+	· time_to_eat
 	· time_to_sleep
 	· number_of_times_each_philosopher_must_eat (opcional)
 
@@ -111,12 +112,12 @@ As regras específicas para a parte obrigatória são:
 • Para evitar que os filósofos dupliquem garfos, você deve proteger o estado dos garfos com um mutex para cada um deles.
 
 
-           ██████╗  █████╗ ██████╗ ████████╗███████╗  ██████╗  █████╗ ███╗  ██╗██╗   ██╗ ██████╗
-           ██╔══██╗██╔══██╗██╔══██╗╚══██╔══╝██╔════╝  ██╔══██╗██╔══██╗████╗ ██║██║   ██║██╔════╝
-           ██████╔╝███████║██████╔╝   ██║   █████╗    ██████╦╝██║  ██║██╔██╗██║██║   ██║╚█████╗
-           ██╔═══╝ ██╔══██║██╔══██╗   ██║   ██╔══╝    ██╔══██╗██║  ██║██║╚████║██║   ██║ ╚═══██╗
-           ██║     ██║  ██║██║  ██║   ██║   ███████╗  ██████╦╝╚█████╔╝██║ ╚███║╚██████╔╝██████╔╝
-           ╚═╝     ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝   ╚══════╝  ╚═════╝  ╚════╝ ╚═╝  ╚══╝ ╚═════╝ ╚═════╝
+			██████╗  █████╗ ██████╗ ████████╗███████╗  ██████╗  █████╗ ███╗  ██╗██╗   ██╗ ██████╗
+			██╔══██╗██╔══██╗██╔══██╗╚══██╔══╝██╔════╝  ██╔══██╗██╔══██╗████╗ ██║██║   ██║██╔════╝
+			██████╔╝███████║██████╔╝   ██║   █████╗    ██████╦╝██║  ██║██╔██╗██║██║   ██║╚█████╗
+			██╔═══╝ ██╔══██║██╔══██╗   ██║   ██╔══╝    ██╔══██╗██║  ██║██║╚████║██║   ██║ ╚═══██╗
+			██║     ██║  ██║██║  ██║   ██║   ███████╗  ██████╦╝╚█████╔╝██║ ╚███║╚██████╔╝██████╔╝
+			╚═╝     ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝   ╚══════╝  ╚═════╝  ╚════╝ ╚═╝  ╚══╝ ╚═════╝ ╚═════╝
 
 Aquivos devem estar dentro da pasta
 • philo_bonus/
@@ -157,3 +158,23 @@ O programa da parte bônus leva os mesmos argumentos do programa obrigatório. T
 • Todos os garfos são colocados no meio da mesa.
 • Eles não têm estados na memória, mas o número de forks disponíveis é representado por um semáforo.
 • Cada filósofo deve ser um processo. Mas o processo principal não deve ser um filósofo
+
+===================================================================================================================================
+
+
+				 █████╗ ███╗ ░██╗░█████╗ ████████╗ █████╗ ░█████╗ ░█████╗ ███████╗ ██████╗
+				██╔══██╗████╗ ██║██╔══██╗╚══██╔══╝██╔══██╗██╔══██╗██╔══██╗██╔════╝██╔════╝
+				███████║██╔██╗██║██║ ░██║ ░░██║ ░░███████║██║░░╚═╝██║░░██║█████╗ ░╚█████╗
+				██╔══██║██║╚████║██║ ░██║ ░░██║ ░░██╔══██║██║░░██╗██║░░██║██╔══╝ ░░╚═══██╗
+				██║ ░██║██║░╚███║╚█████╔╝ ░░██║ ░░██║░░██║╚█████╔╝╚█████╔╝███████╗██████╔╝
+				╚═╝ ░╚═╝╚═╝ ░╚══╝ ╚════╝░ ░░╚═╝ ░░╚═╝░░╚═╝░╚════╝ ░╚════╝ ╚══════╝╚═════╝
+
+
+struct timeval	start;
+struct timeval	end;
+
+gettimeofday(&start, NULL);
+//Codigo no meio
+gettimeofday(&end, NULL);
+printf("start -> %ld\nend -> %ld\n", start.tv_usec, end.tv_usec);
+printf("diferenca = %ld\n", end.tv_usec - start.tv_usec);
