@@ -6,7 +6,7 @@
 /*   By: ekaik-ne <ekaik-ne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 16:30:32 by ekaik-ne          #+#    #+#             */
-/*   Updated: 2023/06/29 14:07:01 by ekaik-ne         ###   ########.fr       */
+/*   Updated: 2023/06/30 16:55:32 by ekaik-ne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,5 @@ void	ft_pull_args(int argc, char **argv, t_philo *philo)
 		philo->number_of_times_each_philosopher_must_eat = 0;
 		philo->arg_bonus = 0;
 	}
+	philo->philo_active = 0;
 }
