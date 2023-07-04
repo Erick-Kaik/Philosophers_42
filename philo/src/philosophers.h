@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekaik-ne <ekaik-ne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ekaik-ne <ekaik-ne@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 08:45:15 by ekaik-ne          #+#    #+#             */
-/*   Updated: 2023/06/30 16:24:31 by ekaik-ne         ###   ########.fr       */
+/*   Updated: 2023/07/04 11:31:56 by ekaik-ne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,5 @@ int		ft_atoi(const char *str);
 void	ft_pull_args(int argc, char **argv, t_philo *philo);
 void	ft_philo_init(t_philo *philo);
 void	*ft_rotine(void *philo);
+void	ft_print_philo(int philo, char *text_print);
 #endif

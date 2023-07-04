@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekaik-ne <ekaik-ne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ekaik-ne <ekaik-ne@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 16:30:32 by ekaik-ne          #+#    #+#             */
-/*   Updated: 2023/06/30 16:55:32 by ekaik-ne         ###   ########.fr       */
+/*   Updated: 2023/07/04 12:20:49 by ekaik-ne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,12 @@ void	ft_pull_args(int argc, char **argv, t_philo *philo)
 		philo->arg_bonus = 0;
 	}
 	philo->philo_active = 0;
+}
+
+void	ft_print_philo(int philo, char *text_print)
+{
+	struct timeval	start;
+
+	gettimeofday(&start, NULL);
+	printf("%ld %d %s\n", start.tv_usec, philo, text_print);
 }

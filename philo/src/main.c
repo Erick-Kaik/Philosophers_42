@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekaik-ne <ekaik-ne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ekaik-ne <ekaik-ne@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 09:59:04 by ekaik-ne          #+#    #+#             */
-/*   Updated: 2023/06/30 17:49:41 by ekaik-ne         ###   ########.fr       */
+/*   Updated: 2023/07/04 12:51:25 by ekaik-ne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,14 @@ void	ft_philo_init(t_philo *philo)
 	printf("N Philo %d e Ativo %d\n", philo->number_of_philosophers, philo->philo_active);
 	while (1)
 	{
+		pthread_mutex_init(&philo->mutex, NULL);
 		while (philo->philo_active < philo->number_of_philosophers)
 		{
 			pthread_create(&philo->philos[philo->philo_active], NULL, ft_rotine, (void *)philo);
-			printf("criou a thread %d\n", philo->philo_active);
+			pthread_join(philo->philos[philo->philo_active++], NULL);
 		}
 		printf("coisou o coisa\n");
-		philo->philo_active = 0;
-		while (philo->philo_active < philo->number_of_philosophers)
-		{
-			pthread_join(philo->philos[philo->philo_active], NULL);
-			philo->philo_active++;
-		}
+		pthread_mutex_destroy(&philo->mutex);
 		printf("Finish loop\n");
 		break ;
 	}
@@ -54,10 +50,19 @@ void *ft_rotine(void *philo)
 
 	aux = (t_philo *)philo;
 	pthread_mutex_lock(&aux->mutex);
-	printf("entrou\n");
-	printf("filoso ativo: %d\n", aux->philo_active);
-	pthread_detach(aux->philos[aux->philo_active]);
-	aux->philo_active++;
+	gettimeofday(&aux->start_time, NULL);
+	printf("criou a thread %d\n", aux->philo_active);
+	printf("filoso ativo: %d vai comer em %ld milisegundos\n", aux->philo_active, aux->time_to_eat);
+	ft_print_philo(aux->philo_active, "has taken a left fork");
+	ft_print_philo(aux->philo_active, "has taken a right fork");
+	ft_print_philo(aux->philo_active, "is eating");
+	usleep(aux->time_to_eat);
+	gettimeofday(&aux->reset_time, NULL);
+	if (aux->reset_time.tv_usec > (aux->start_time.tv_usec + aux->time_to_die))
+	{
+		ft_print_philo(aux->philo_active, "died");
+		exit(0);
+	}
 	pthread_mutex_unlock(&aux->mutex);
 	return (NULL);
 }

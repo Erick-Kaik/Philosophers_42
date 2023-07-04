@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ekaik-ne <ekaik-ne@student.42.fr>          +#+  +:+       +#+         #
+#    By: ekaik-ne <ekaik-ne@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/27 09:24:24 by ekaik-ne          #+#    #+#              #
-#    Updated: 2023/06/29 14:07:27 by ekaik-ne         ###   ########.fr        #
+#    Updated: 2023/07/02 10:59:08 by ekaik-ne         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,13 +21,13 @@ OBJS = $(addprefix $(OBJSDIR)/, $(SRC:%.c=%.o))
 all: $(NAME)
 
 ${NAME}: $(OBJSDIR) $(OBJS)
-		$(CC) $(CFLAGS) $(OBJS) -o $@
+		$(CC) $(CFLAGS) $(OBJS) -o $@ -pthread
 
 $(OBJSDIR):
 		mkdir -p $@
 
 $(OBJSDIR)/%.o: src/%.c src/philosophers.h
-		$(CC) $(CFLAGS) -c $< -o $@
+		$(CC) $(CFLAGS) -c $< -o $@ -pthread
 
 clean:
 	rm -rf $(OBJSDIR)
