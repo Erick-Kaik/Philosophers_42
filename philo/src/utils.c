@@ -49,23 +49,43 @@ int	ft_check_args(int argc, char **argv)
 	return (0);
 }
 
-void	ft_pull_args(int argc, char **argv, t_philo *philo)
+void	ft_pull_args(int argc, char **argv, t_data *data)
 {
-	philo->number_of_philosophers = ft_atoi(argv[1]);
-	philo->time_to_die = ft_atoi(argv[2]);
-	philo->time_to_eat = ft_atoi(argv[3]);
-	philo->time_to_sleep = ft_atoi(argv[4]);
+	data->rules.num_philo = ft_atoi(argv[1]);
+	data->rules.time_die = ft_atoi(argv[2]);
+	data->rules.time_eat = ft_atoi(argv[3]);
+	data->rules.time_sleep = ft_atoi(argv[4]);
 	if (argc == 6)
-	{
-		philo->number_of_times_each_philosopher_must_eat = ft_atoi(argv[5]);
-		philo->arg_bonus = 1;
-	}
+		data->rules.num_philo_eat = ft_atoi(argv[5]);
 	else
+		data->rules.num_philo_eat = -1;
+}
+
+int	ft_generate_struct_philo(t_data *data)
+{
+	int	l_fork;
+	int	r_fork;
+
+	l_fork = 0;
+	r_fork = 1;
+	data->philos = malloc(sizeof(t_philo) * (data->rules.num_philo + 1));
+	if (data->philos == NULL)
+		return (1);
+	while (r_fork < data->rules.num_philo)
 	{
-		philo->number_of_times_each_philosopher_must_eat = 0;
-		philo->arg_bonus = 0;
+		data->philos->id_philo = l_fork + 1;
+		data->philos->num_time_eat = 0;
+		data->philos->time_to_die = 0;
+		data->philos->l_fork = l_fork++;
+		data->philos->r_fork = r_fork++;
 	}
-	philo->philo_active = 0;
+	r_fork = 0;
+	data->philos->id_philo = l_fork + 1;
+	data->philos->num_time_eat = 0;
+	data->philos->time_to_die = 0;
+	data->philos->l_fork = l_fork;
+	data->philos->r_fork = r_fork;
+	return (0);
 }
 
 void	ft_print_philo(int philo, char *text_print)

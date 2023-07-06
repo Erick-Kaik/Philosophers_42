@@ -27,7 +27,7 @@ $(OBJSDIR):
 		mkdir -p $@
 
 $(OBJSDIR)/%.o: src/%.c src/philosophers.h
-		$(CC) $(CFLAGS) -c $< -o $@ -pthread
+		$(CC) $(CFLAGS) -c $< -o $@ -pthread -lrt
 
 clean:
 	rm -rf $(OBJSDIR)
