@@ -25,73 +25,30 @@ int	ft_check_error_size_argc(int args)
 	return (0);
 }
 
-int	ft_check_args(int argc, char **argv)
+long	ft_timestamp_ms(void)
 {
-	int	x;
-	int	arg;
+	struct timeval	time;
+	long			ms;
 
-	arg = 1;
-	while (arg < argc)
-	{
-		x = 0;
-		while (argv[arg][x] != '\0')
-		{
-			if (argv[arg][x] < '0' || argv[arg][x] > '9')
-			{
-				printf("argument '%s' is invalid, accept only numbers\n",
-					argv[arg]);
-				return (1);
-			}
-			x++;
-		}
-		arg++;
-	}
-	return (0);
+	gettimeofday(&time, NULL);
+	ms = (time.tv_sec * 1000) + (time.tv_usec / 1000);
+	return (ms);
 }
 
-void	ft_pull_args(int argc, char **argv, t_data *data)
+int	ft_print_philo(t_data *data, int id, char *text_print)
 {
-	data->rules.num_philo = ft_atoi(argv[1]);
-	data->rules.time_die = ft_atoi(argv[2]);
-	data->rules.time_eat = ft_atoi(argv[3]);
-	data->rules.time_sleep = ft_atoi(argv[4]);
-	if (argc == 6)
-		data->rules.num_philo_eat = ft_atoi(argv[5]);
-	else
-		data->rules.num_philo_eat = -1;
-}
+	long	time_now;
 
-int	ft_generate_struct_philo(t_data *data)
-{
-	int	l_fork;
-	int	r_fork;
-
-	l_fork = 0;
-	r_fork = 1;
-	data->philos = malloc(sizeof(t_philo) * (data->rules.num_philo + 1));
-	if (data->philos == NULL)
+	time_now = ft_timestamp_ms() - data->time_start;
+	if (data->philo_dead == 1)
 		return (1);
-	while (r_fork < data->rules.num_philo)
+	pthread_mutex_lock(&data->print);
+	if (data->philo_dead == 1)
 	{
-		data->philos->id_philo = l_fork + 1;
-		data->philos->num_time_eat = 0;
-		data->philos->time_to_die = 0;
-		data->philos->l_fork = l_fork++;
-		data->philos->r_fork = r_fork++;
+		pthread_mutex_unlock(&data->print);
+		return (1);
 	}
-	r_fork = 0;
-	data->philos->id_philo = l_fork + 1;
-	data->philos->num_time_eat = 0;
-	data->philos->time_to_die = 0;
-	data->philos->l_fork = l_fork;
-	data->philos->r_fork = r_fork;
+	else
+		printf("%ld %d %s\n", time_now, id, text_print);
 	return (0);
-}
-
-void	ft_print_philo(int philo, char *text_print)
-{
-	struct timeval	start;
-
-	gettimeofday(&start, NULL);
-	printf("%ld %d %s\n", start.tv_usec, philo, text_print);
 }

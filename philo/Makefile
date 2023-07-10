@@ -13,7 +13,7 @@
 NAME = philo
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
-SRC = main.c utils.c ft_atoi.c
+SRC = actions.c initialize_values.c ft_atoi.c main.c routine.c utils.c
 OBJSDIR = obj
 OBJS = $(addprefix $(OBJSDIR)/, $(SRC:%.c=%.o))
 .PHONY = all clean fclean re
@@ -27,7 +27,7 @@ $(OBJSDIR):
 		mkdir -p $@
 
 $(OBJSDIR)/%.o: src/%.c src/philosophers.h
-		$(CC) $(CFLAGS) -c $< -o $@ -pthread -lrt
+		$(CC) $(CFLAGS) -c $< -o $@ -pthread
 
 clean:
 	rm -rf $(OBJSDIR)
