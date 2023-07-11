@@ -48,7 +48,7 @@ int	ft_print_philo(t_data *data, int id, char *text_print)
 		pthread_mutex_unlock(&data->print);
 		return (1);
 	}
-	else
-		printf("%ld %d %s\n", time_now, id, text_print);
+	printf("%ld %d %s\n", time_now, id, text_print);
+	pthread_mutex_unlock(&data->print);
 	return (0);
 }

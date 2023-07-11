@@ -6,7 +6,7 @@
 /*   By: ekaik-ne <ekaik-ne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 10:31:18 by ekaik-ne          #+#    #+#             */
-/*   Updated: 2023/07/10 19:33:50 by ekaik-ne         ###   ########.fr       */
+/*   Updated: 2023/07/11 09:02:03 by ekaik-ne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,13 +75,6 @@ int	ft_generate_struct_philo(t_data *data)
 	data->philos[x].time_to_die = 0;
 	data->philos[x].l_fork = x;
 	data->philos[x].r_fork = y;
-	x = 0;
-	while (x < data->rules.num_philo)
-	{
-		printf("L = %d <> R = %d\n", data->philos[x].l_fork, data->philos[x].r_fork);
-		x++;
-	}
-
 	return (0);
 }
 

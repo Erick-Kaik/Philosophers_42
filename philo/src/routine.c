@@ -6,7 +6,7 @@
 /*   By: ekaik-ne <ekaik-ne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 14:37:42 by ekaik-ne          #+#    #+#             */
-/*   Updated: 2023/07/10 19:25:54 by ekaik-ne         ###   ########.fr       */
+/*   Updated: 2023/07/11 09:26:01 by ekaik-ne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,19 @@ void	*ft_rotine(void *arg)
 
 	data = (t_data *)arg;
 	act = data->act_philo;
-	while (data->philo_dead == 0 || (data->rules.num_philo_eat > 0
-			&& (data->rules.num_philo_eat > data->philos[act].num_time_eat)))
-		if (ft_exec_rotine(data, act) != 0)
-			break ;
+	if (data->rules.num_philo_eat > 0)
+	{
+		while (data->rules.num_philo_eat > data->philos[act].num_time_eat
+			&& data->philo_dead == 0)
+			if (ft_exec_rotine(data, act) != 0)
+				break ;
+	}
+	else
+	{
+		while (data->philo_dead == 0)
+			if (ft_exec_rotine(data, act) != 0)
+				break ;
+	}
 	return (NULL);
 }
 
@@ -44,10 +53,19 @@ void	*ft_checker(void *arg)
 
 	act = 0;
 	data = (t_data *)arg;
-	while (data->philo_dead == 0 || (data->rules.num_philo_eat > 0
-			&& (data->rules.num_philo_eat > data->philos[act].num_time_eat)))
-		if (ft_check_its_dead(data, &act) != 0)
-			break ;
+	if (data->rules.num_philo_eat > 0)
+	{
+		while (data->rules.num_philo_eat > data->philos[act].num_time_eat
+			&& data->philo_dead == 0)
+			if (ft_check_its_dead(data, &act) != 0)
+				break ;
+	}
+	else
+	{
+		while (data->philo_dead == 0)
+			if (ft_check_its_dead(data, &act) != 0)
+				break ;
+	}
 	return (NULL);
 }
 

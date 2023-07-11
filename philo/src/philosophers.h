@@ -50,7 +50,6 @@ typedef struct s_data
 	pthread_mutex_t	*forks;
 }	t_data;
 
-
 int		main(int argc, char **argv);
 int		ft_atoi(const char *str);
 int		ft_philo_init(t_data *data);

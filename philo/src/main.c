@@ -65,4 +65,5 @@ void	ft_destroy_philos(t_data *data)
 		x++;
 	}
 	pthread_mutex_destroy(&data->print);
+	free(data->philos);
 }

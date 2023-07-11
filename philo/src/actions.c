@@ -6,7 +6,7 @@
 /*   By: ekaik-ne <ekaik-ne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 14:37:39 by ekaik-ne          #+#    #+#             */
-/*   Updated: 2023/07/10 19:35:26 by ekaik-ne         ###   ########.fr       */
+/*   Updated: 2023/07/11 09:06:55 by ekaik-ne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int	ft_time_to_eat(t_data *data, int act)
 		return (1);
 	if (ft_print_philo(data, data->philos[act].id, "has taken a fork") != 0)
 		return (1);
-	printf("garfo = L %d e R = %d\n",data->philos[act].l_fork, data->philos[act].r_fork);
 	if (pthread_mutex_lock(&data->forks[data->philos[act].r_fork]) != 0)
 		return (1);
 	if (ft_print_philo(data, data->philos[act].id, "has taken a fork") != 0)
@@ -37,7 +36,7 @@ int	ft_time_to_eat(t_data *data, int act)
 
 int	ft_time_to_sleep(t_data *data, int act)
 {
-	if (ft_print_philo(data, data->philos[act].id, "ft_time_to_sleep") != 0)
+	if (ft_print_philo(data, data->philos[act].id, "is sleeping") != 0)
 		return (1);
 	usleep(data->rules.time_sleep * 1000);
 	return (0);
@@ -45,7 +44,7 @@ int	ft_time_to_sleep(t_data *data, int act)
 
 int	ft_time_to_think(t_data *data, int act)
 {
-	if (ft_print_philo(data, data->philos[act].id, "ft_time_to_sleep") != 0)
+	if (ft_print_philo(data, data->philos[act].id, "is thinking") != 0)
 		return (1);
 	return (0);
 }
@@ -56,7 +55,10 @@ int	ft_check_its_dead(t_data *data, int *act)
 
 	if (*act == data->rules.num_philo)
 		*act = 0;
-	timer = ft_timestamp_ms() - data->philos[*act].time_to_die;
+	if (data->philos[*act].time_to_die > 0)
+		timer = ft_timestamp_ms() - data->philos[*act].time_to_die;
+	else
+		timer = 0;
 	if (timer > data->rules.time_die)
 	{
 		ft_print_philo(data, data->philos[*act].id, "died ☠️");
