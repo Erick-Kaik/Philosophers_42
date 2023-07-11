@@ -6,7 +6,7 @@
 /*   By: ekaik-ne <ekaik-ne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 14:37:39 by ekaik-ne          #+#    #+#             */
-/*   Updated: 2023/07/11 09:06:55 by ekaik-ne         ###   ########.fr       */
+/*   Updated: 2023/07/11 16:53:22 by ekaik-ne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,11 @@ int	ft_check_its_dead(t_data *data, int *act)
 {
 	long	timer;
 
+	timer = 0;
 	if (*act == data->rules.num_philo)
 		*act = 0;
 	if (data->philos[*act].time_to_die > 0)
 		timer = ft_timestamp_ms() - data->philos[*act].time_to_die;
-	else
-		timer = 0;
 	if (timer > data->rules.time_die)
 	{
 		ft_print_philo(data, data->philos[*act].id, "died ☠️");

@@ -23,8 +23,11 @@ int	main(int argc, char **argv)
 		return (1);
 	if (ft_initialize_mutex_fork(&data) == 1)
 		return (1);
-	if (ft_philo_init(&data) == 1)
-		return (1);
+	if (data.rules.num_philo <= 1)
+		ft_unique_philo(&data);
+	else
+		if (ft_philo_init(&data) == 1)
+			return (1);
 	ft_destroy_philos(&data);
 	return (0);
 }
@@ -35,8 +38,6 @@ int	ft_philo_init(t_data *data)
 
 	x = 0;
 	data->time_start = ft_timestamp_ms();
-	if (pthread_mutex_init(&data->print, NULL) != 0)
-		return (1);
 	while (x < data->rules.num_philo)
 	{
 		data->act_philo = x;
@@ -66,4 +67,13 @@ void	ft_destroy_philos(t_data *data)
 	}
 	pthread_mutex_destroy(&data->print);
 	free(data->philos);
+	free(data->forks);
+}
+
+void	ft_unique_philo(t_data *data)
+{
+	data->time_start = ft_timestamp_ms();
+	ft_print_philo(data, 1, "has taken a fork");
+	usleep((data->rules.time_die * 1000));
+	ft_print_philo(data, 1, "died ☠️");
 }

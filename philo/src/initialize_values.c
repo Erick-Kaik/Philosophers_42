@@ -6,7 +6,7 @@
 /*   By: ekaik-ne <ekaik-ne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 10:31:18 by ekaik-ne          #+#    #+#             */
-/*   Updated: 2023/07/11 09:02:03 by ekaik-ne         ###   ########.fr       */
+/*   Updated: 2023/07/11 10:05:11 by ekaik-ne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,5 +92,7 @@ int	ft_initialize_mutex_fork(t_data *data)
 			return (1);
 		x++;
 	}
+	if (pthread_mutex_init(&data->print, NULL) != 0)
+		return (1);
 	return (0);
 }

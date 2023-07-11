@@ -69,5 +69,6 @@ int		ft_check_its_dead(t_data *data, int *act);
 void	*ft_checker(void *arg);
 int		ft_join_philos(t_data *data);
 void	ft_destroy_philos(t_data *data);
+void	ft_unique_philo(t_data *data);
 
 #endif
