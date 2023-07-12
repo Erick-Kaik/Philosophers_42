@@ -6,7 +6,7 @@
 /*   By: ekaik-ne <ekaik-ne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 14:37:39 by ekaik-ne          #+#    #+#             */
-/*   Updated: 2023/07/11 16:53:22 by ekaik-ne         ###   ########.fr       */
+/*   Updated: 2023/07/12 08:54:16 by ekaik-ne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,10 @@ int	ft_time_to_think(t_data *data, int act)
 int	ft_check_its_dead(t_data *data, int *act)
 {
 	long	timer;
+	int		max;
 
 	timer = 0;
-	if (*act == data->rules.num_philo)
-		*act = 0;
+	max = data->rules.num_philo;
 	if (data->philos[*act].time_to_die > 0)
 		timer = ft_timestamp_ms() - data->philos[*act].time_to_die;
 	if (timer > data->rules.time_die)
@@ -65,5 +65,7 @@ int	ft_check_its_dead(t_data *data, int *act)
 		return (1);
 	}
 	*act += 1;
+	if (*act >= max)
+		*act = 0;
 	return (0);
 }
