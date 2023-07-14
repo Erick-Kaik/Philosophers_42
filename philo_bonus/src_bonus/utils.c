@@ -6,7 +6,7 @@
 /*   By: ekaik-ne <ekaik-ne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 11:03:51 by ekaik-ne          #+#    #+#             */
-/*   Updated: 2023/07/12 11:04:42 by ekaik-ne         ###   ########.fr       */
+/*   Updated: 2023/07/14 17:36:10 by ekaik-ne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,33 @@ int	ft_check_args(int argc, char **argv)
 		}
 		arg++;
 	}
+	return (0);
+}
+
+long	ft_timestamp_ms(void)
+{
+	struct timeval	time;
+	long			ms;
+
+	gettimeofday(&time, NULL);
+	ms = (time.tv_sec * 1000) + (time.tv_usec / 1000);
+	return (ms);
+}
+
+int	ft_print_philo(t_data *data, pid_t id, char *text_print)
+{
+	long	time_now;
+
+	time_now = ft_timestamp_ms() - data->time_start;
+	if (data->philo_dead == 1)
+		return (1);
+	sem_wait(data->print);
+	if (data->philo_dead == 1)
+	{
+		sem_post(data->print);
+		return (1);
+	}
+	printf("%ld %d %s\n", time_now, id, text_print);
+	sem_post(data->print);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ekaik-ne <ekaik-ne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 11:02:56 by ekaik-ne          #+#    #+#             */
-/*   Updated: 2023/07/12 15:13:36 by ekaik-ne         ###   ########.fr       */
+/*   Updated: 2023/07/14 17:18:44 by ekaik-ne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,19 +45,11 @@ int	ft_generate_struct_philo(t_data *data)
 
 int	ft_initialize_semaphore_fork(t_data *data)
 {
-	int	x;
-
-	x = 0;
-	data->forks = malloc(sizeof(pthread_mutex_t) * data->rules.num_philo + 1);
-	if (data->forks == NULL)
-		return (1);
-	while (x < data->rules.num_philo)
-	{
-		if (pthread_mutex_init(&data->forks[x], NULL) != 0)
-			return (1);
-		x++;
-	}
-	if (pthread_mutex_init(&data->print, NULL) != 0)
+	sem_unlink("/forks");
+	sem_unlink("/print");
+	data->forks = sem_open("/forks", O_CREAT, 0777, 1);
+	data->print = sem_open("/print", O_CREAT, 0777, 1);
+	if (data->forks == SEM_FAILED || data->print == SEM_FAILED)
 		return (1);
 	return (0);
 }

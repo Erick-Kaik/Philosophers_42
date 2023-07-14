@@ -31,3 +31,24 @@ int	main(int argc, char **argv)
 	ft_destroy_philos(&data);
 	return (0);
 }
+
+void	ft_destroy_philos(t_data *data)
+{
+	sem_unlink("/forks");
+	sem_unlink("/print");
+	free(data->philos);
+}
+
+void	ft_unique_philo(t_data *data)
+{
+	data->philos[0].id = fork();
+	if (data->philos[0].id == 0)
+	{
+		data->time_start = ft_timestamp_ms();
+		ft_print_philo(data, 1, "has taken a fork");
+		usleep((data->rules.time_die * 1000));
+		ft_print_philo(data, 1, "died ☠️");
+		ft_destroy_philos(data);
+		exit(0);
+	}
+}
