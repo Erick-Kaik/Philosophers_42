@@ -6,7 +6,7 @@
 /*   By: ekaik-ne <ekaik-ne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 11:02:56 by ekaik-ne          #+#    #+#             */
-/*   Updated: 2023/07/14 17:18:44 by ekaik-ne         ###   ########.fr       */
+/*   Updated: 2023/07/17 17:49:17 by ekaik-ne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,20 @@ int	ft_generate_struct_philo(t_data *data)
 
 int	ft_initialize_semaphore_fork(t_data *data)
 {
+	data->forks = NULL;
+	data->print = NULL;
+	data->routine = NULL;
+	data->dead = NULL;
 	sem_unlink("/forks");
 	sem_unlink("/print");
+	sem_unlink("/routine");
+	sem_unlink("/dead");
 	data->forks = sem_open("/forks", O_CREAT, 0777, 1);
 	data->print = sem_open("/print", O_CREAT, 0777, 1);
-	if (data->forks == SEM_FAILED || data->print == SEM_FAILED)
+	data->routine = sem_open("/routine", O_CREAT, 0777, 1);
+	data->dead = sem_open("/dead", O_CREAT, 0777, 1);
+	if (data->forks == SEM_FAILED || data->print == SEM_FAILED
+		|| data->routine == SEM_FAILED || data->dead == SEM_FAILED)
 		return (1);
 	return (0);
 }

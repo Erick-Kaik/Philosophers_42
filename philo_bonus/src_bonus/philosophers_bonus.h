@@ -6,7 +6,7 @@
 /*   By: ekaik-ne <ekaik-ne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 10:32:54 by ekaik-ne          #+#    #+#             */
-/*   Updated: 2023/07/14 17:07:55 by ekaik-ne         ###   ########.fr       */
+/*   Updated: 2023/07/17 17:47:38 by ekaik-ne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@
 # include <fcntl.h>
 # include <sys/types.h>
 # include <signal.h>
+# include <unistd.h>
+# include <sys/wait.h>
+
 typedef struct s_rules
 {
 	int				num_philo;
@@ -50,6 +53,8 @@ typedef struct s_data
 	pthread_t	checker;
 	sem_t		*print;
 	sem_t		*forks;
+	sem_t		*routine;
+	sem_t		*dead;
 }	t_data;
 
 void	ft_pull_args(int argc, char **argv, t_data *data);
@@ -61,7 +66,7 @@ long	ft_timestamp_ms(void);
 int		ft_time_to_eat(t_data *data, int act);
 int		ft_time_to_sleep(t_data *data, int act);
 int		ft_time_to_think(t_data *data, int act);
-int		ft_check_its_dead(t_data *data, int *act);
+int		ft_check_its_dead(t_data *data, int act);
 int		ft_philo_init(t_data *data);
 void	ft_routine(t_data *data);
 int		ft_exec_rotine(t_data *data, int act);

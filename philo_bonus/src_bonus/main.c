@@ -23,11 +23,13 @@ int	main(int argc, char **argv)
 		return (1);
 	if (ft_initialize_semaphore_fork(&data) == 1)
 		return (1);
+	sem_wait(data.routine);
 	if (data.rules.num_philo <= 1)
 		ft_unique_philo(&data);
 	else
 		if (ft_philo_init(&data) == 1)
 			return (1);
+	sem_wait(data.routine);
 	ft_destroy_philos(&data);
 	return (0);
 }
@@ -36,6 +38,8 @@ void	ft_destroy_philos(t_data *data)
 {
 	sem_unlink("/forks");
 	sem_unlink("/print");
+	sem_unlink("/routine");
+	sem_unlink("/dead");
 	free(data->philos);
 }
 
@@ -51,4 +55,6 @@ void	ft_unique_philo(t_data *data)
 		ft_destroy_philos(data);
 		exit(0);
 	}
+	else
+		waitpid(data->philos[0].id, NULL, WUNTRACED);
 }
