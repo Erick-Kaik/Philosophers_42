@@ -6,7 +6,7 @@
 /*   By: ekaik-ne <ekaik-ne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 10:28:27 by ekaik-ne          #+#    #+#             */
-/*   Updated: 2023/07/17 17:55:45 by ekaik-ne         ###   ########.fr       */
+/*   Updated: 2023/07/18 13:07:05 by ekaik-ne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ int	ft_philo_init(t_data *data)
 			data->act_philo = x;
 			data->philos[x].id = x + 1;
 			ft_routine(data);
+			sem_post(data->routine);
 			exit(0);
 		}
 		else
 			x++;
-		usleep(1000);
 	}
 	return (0);
 }
@@ -43,7 +43,6 @@ void	ft_routine(t_data *data)
 
 	act = data->act_philo;
 	pthread_create(&data->checker, NULL, &ft_checker, (void *)data);
-	pthread_detach(data->checker);
 	if (data->rules.num_philo_eat > 0)
 	{
 		while (data->rules.num_philo_eat > data->philos[act].num_time_eat
@@ -57,7 +56,7 @@ void	ft_routine(t_data *data)
 			if (ft_exec_rotine(data, act) != 0)
 				break ;
 	}
-	printf("-> %d\n", data->philo_dead);
+	pthread_join(data->checker, NULL);
 }
 
 int	ft_exec_rotine(t_data *data, int act)

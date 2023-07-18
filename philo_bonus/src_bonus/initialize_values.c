@@ -6,7 +6,7 @@
 /*   By: ekaik-ne <ekaik-ne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 11:02:56 by ekaik-ne          #+#    #+#             */
-/*   Updated: 2023/07/17 17:49:17 by ekaik-ne         ###   ########.fr       */
+/*   Updated: 2023/07/18 13:26:47 by ekaik-ne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,10 @@ int	ft_initialize_semaphore_fork(t_data *data)
 	sem_unlink("/print");
 	sem_unlink("/routine");
 	sem_unlink("/dead");
-	data->forks = sem_open("/forks", O_CREAT, 0777, 1);
-	data->print = sem_open("/print", O_CREAT, 0777, 1);
-	data->routine = sem_open("/routine", O_CREAT, 0777, 1);
-	data->dead = sem_open("/dead", O_CREAT, 0777, 1);
+	data->forks = sem_open("/forks", O_CREAT, 0644, 1);
+	data->print = sem_open("/print", O_CREAT, 0644, 1);
+	data->routine = sem_open("/routine", O_CREAT, 0644, 1);
+	data->dead = sem_open("/dead", O_CREAT, 0644, 1);
 	if (data->forks == SEM_FAILED || data->print == SEM_FAILED
 		|| data->routine == SEM_FAILED || data->dead == SEM_FAILED)
 		return (1);

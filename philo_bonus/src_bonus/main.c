@@ -36,6 +36,15 @@ int	main(int argc, char **argv)
 
 void	ft_destroy_philos(t_data *data)
 {
+	int	x;
+
+	x = 0;
+	while (x < data->rules.num_philo)
+		kill(data->philos[x++].id, SIGKILL);
+	sem_close(data->forks);
+	sem_close(data->print);
+	sem_close(data->routine);
+	sem_close(data->dead);
 	sem_unlink("/forks");
 	sem_unlink("/print");
 	sem_unlink("/routine");
@@ -49,12 +58,10 @@ void	ft_unique_philo(t_data *data)
 	if (data->philos[0].id == 0)
 	{
 		data->time_start = ft_timestamp_ms();
-		ft_print_philo(data, 1, "has taken a fork");
+		ft_print_philo(data, 1, FORK, 1);
 		usleep((data->rules.time_die * 1000));
-		ft_print_philo(data, 1, "died ☠️");
-		ft_destroy_philos(data);
+		ft_print_philo(data, 1, DIE, 5);
+		sem_post(data->routine);
 		exit(0);
 	}
-	else
-		waitpid(data->philos[0].id, NULL, WUNTRACED);
 }

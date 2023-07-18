@@ -158,23 +158,3 @@ O programa da parte bônus leva os mesmos argumentos do programa obrigatório. T
 • Todos os garfos são colocados no meio da mesa.
 • Eles não têm estados na memória, mas o número de forks disponíveis é representado por um semáforo.
 • Cada filósofo deve ser um processo. Mas o processo principal não deve ser um filósofo
-
-===================================================================================================================================
-
-
-				 █████╗ ███╗ ░██╗░█████╗ ████████╗ █████╗ ░█████╗ ░█████╗ ███████╗ ██████╗
-				██╔══██╗████╗ ██║██╔══██╗╚══██╔══╝██╔══██╗██╔══██╗██╔══██╗██╔════╝██╔════╝
-				███████║██╔██╗██║██║ ░██║ ░░██║ ░░███████║██║░░╚═╝██║░░██║█████╗ ░╚█████╗
-				██╔══██║██║╚████║██║ ░██║ ░░██║ ░░██╔══██║██║░░██╗██║░░██║██╔══╝ ░░╚═══██╗
-				██║ ░██║██║░╚███║╚█████╔╝ ░░██║ ░░██║░░██║╚█████╔╝╚█████╔╝███████╗██████╔╝
-				╚═╝ ░╚═╝╚═╝ ░╚══╝ ╚════╝░ ░░╚═╝ ░░╚═╝░░╚═╝░╚════╝ ░╚════╝ ╚══════╝╚═════╝
-
-
-struct timeval	start;
-struct timeval	end;
-
-gettimeofday(&start, NULL);
-//Codigo no meio
-gettimeofday(&end, NULL);
-printf("start -> %ld\nend -> %ld\n", start.tv_usec, end.tv_usec);
-printf("diferenca = %ld\n", end.tv_usec - start.tv_usec);

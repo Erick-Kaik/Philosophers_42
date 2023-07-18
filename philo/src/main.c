@@ -73,7 +73,7 @@ void	ft_destroy_philos(t_data *data)
 void	ft_unique_philo(t_data *data)
 {
 	data->time_start = ft_timestamp_ms();
-	ft_print_philo(data, 1, "has taken a fork");
+	ft_print_philo(data, 1, FORK, 1);
 	usleep((data->rules.time_die * 1000));
-	ft_print_philo(data, 1, "died ☠️");
+	ft_print_philo(data, 1, DIE, 5);
 }

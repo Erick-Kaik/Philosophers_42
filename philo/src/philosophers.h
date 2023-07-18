@@ -19,6 +19,19 @@
 # include <pthread.h>
 # include <sys/time.h>
 
+# define RED "\x1b[38;5;160m"
+# define BLUE "\x1b[38;5;21m"
+# define PURPLE "\x1b[38;5;93m"
+# define GREEN "\x1b[38;5;10m"
+# define LIGHT_BLUE "\x1b[38;5;153m"
+# define RESET "\e[0;37m"
+
+# define FORK "has taken a fork 🍴"
+# define EAT "is eating 🍝"
+# define SLEEP "is sleeping 😴"
+# define THINK "is thinking 🤔"
+# define DIE "died ☠️"
+
 typedef struct s_rules
 {
 	int				num_philo;
@@ -61,7 +74,7 @@ int		ft_initialize_mutex_fork(t_data *data);
 void	*ft_rotine(void *arg);
 int		ft_exec_rotine(t_data *data, int act);
 long	ft_timestamp_ms(void);
-int		ft_print_philo(t_data *data, int id, char *text_print);
+int		ft_print_philo(t_data *data, int id, char *text_print, int type);
 int		ft_time_to_eat(t_data *data, int act);
 int		ft_time_to_sleep(t_data *data, int act);
 int		ft_time_to_think(t_data *data, int act);
@@ -70,5 +83,6 @@ void	*ft_checker(void *arg);
 int		ft_join_philos(t_data *data);
 void	ft_destroy_philos(t_data *data);
 void	ft_unique_philo(t_data *data);
+void	ft_get_color(int type);
 
 #endif

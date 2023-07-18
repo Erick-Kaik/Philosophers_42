@@ -35,7 +35,7 @@ long	ft_timestamp_ms(void)
 	return (ms);
 }
 
-int	ft_print_philo(t_data *data, int id, char *text_print)
+int	ft_print_philo(t_data *data, int id, char *text_print, int type)
 {
 	long	time_now;
 
@@ -48,7 +48,22 @@ int	ft_print_philo(t_data *data, int id, char *text_print)
 		pthread_mutex_unlock(&data->print);
 		return (1);
 	}
-	printf("%ld %d %s\n", time_now, id, text_print);
+	ft_get_color(type);
+	printf("%ld	%d	%s%s\n", time_now, id, text_print, RESET);
 	pthread_mutex_unlock(&data->print);
 	return (0);
+}
+
+void	ft_get_color(int type)
+{
+	if (type == 1)
+		printf("%s", BLUE);
+	else if (type == 2)
+		printf("%s", GREEN);
+	else if (type == 3)
+		printf("%s", PURPLE);
+	else if (type == 4)
+		printf("%s", LIGHT_BLUE);
+	else
+		printf("%s", RED);
 }

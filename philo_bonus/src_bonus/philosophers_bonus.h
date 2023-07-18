@@ -6,7 +6,7 @@
 /*   By: ekaik-ne <ekaik-ne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 10:32:54 by ekaik-ne          #+#    #+#             */
-/*   Updated: 2023/07/17 17:47:38 by ekaik-ne         ###   ########.fr       */
+/*   Updated: 2023/07/18 17:30:42 by ekaik-ne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,19 @@
 # include <signal.h>
 # include <unistd.h>
 # include <sys/wait.h>
+
+# define RED "\x1b[38;5;160m"
+# define BLUE "\x1b[38;5;21m"
+# define PURPLE "\x1b[38;5;93m"
+# define GREEN "\x1b[38;5;10m"
+# define LIGHT_BLUE "\x1b[38;5;153m"
+# define RESET "\e[0;37m"
+
+# define FORK "has taken a fork 🍴"
+# define EAT "is eating 🍝"
+# define SLEEP "is sleeping 😴"
+# define THINK "is thinking 🤔"
+# define DIE "died ☠️"
 
 typedef struct s_rules
 {
@@ -73,7 +86,8 @@ int		ft_exec_rotine(t_data *data, int act);
 void	*ft_checker(void *arg);
 void	ft_destroy_philos(t_data *data);
 void	ft_unique_philo(t_data *data);
-int		ft_print_philo(t_data *data, pid_t id, char *text_print);
+int		ft_print_philo(t_data *data, pid_t id, char *text_print, int type);
 int		ft_atoi(const char *str);
+void	ft_get_color(int type);
 
 #endif
