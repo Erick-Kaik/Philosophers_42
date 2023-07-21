@@ -6,7 +6,7 @@
 /*   By: ekaik-ne <ekaik-ne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 12:58:02 by ekaik-ne          #+#    #+#             */
-/*   Updated: 2023/07/20 17:58:34 by ekaik-ne         ###   ########.fr       */
+/*   Updated: 2023/07/21 18:46:14 by ekaik-ne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,14 @@ int	ft_time_to_eat(t_data *data, int act)
 		return (1);
 	if (ft_print_philo(data, data->philos[act].id, EAT, 2) != 0)
 		return (1);
+	data->philos[act].time_to_die = ft_timestamp_ms();
 	usleep(data->rules.time_eat * 1000);
+	data->philos[act].num_time_eat++;
 	data->philos[act].time_to_die = ft_timestamp_ms();
 	if (sem_post(data->forks) != 0)
 		return (1);
 	if (sem_post(data->forks) != 0)
 		return (1);
-	data->philos[act].num_time_eat++;
 	return (0);
 }
 
@@ -53,8 +54,8 @@ int	ft_check_its_dead(t_data *data, int act)
 {
 	long		timer;
 
-	sem_wait(data->dead);
 	timer = 0;
+	sem_wait(data->dead);
 	if (data->philos[act].time_to_die > 0)
 		timer = ft_timestamp_ms() - data->philos[act].time_to_die;
 	if (timer > data->rules.time_die)

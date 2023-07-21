@@ -6,7 +6,7 @@
 #    By: ekaik-ne <ekaik-ne@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/17 10:44:29 by ekaik-ne          #+#    #+#              #
-#    Updated: 2023/07/21 10:02:32 by ekaik-ne         ###   ########.fr        #
+#    Updated: 2023/07/21 18:30:59 by ekaik-ne         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 
 NAME = philo_bonus
 CC = gcc
-CFLAGS = -g3 -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 SRC = actions.c  ft_atoi.c  initialize_values.c  main.c  routine.c  utils.c
 OBJSDIR = obj
 OBJS = $(addprefix $(OBJSDIR)/, $(SRC:%.c=%.o))
