@@ -32,6 +32,19 @@
 # define THINK "is thinking 🤔"
 # define DIE "died ☠️"
 
+/* # define RED ""
+# define BLUE ""
+# define PURPLE ""
+# define GREEN ""
+# define LIGHT_BLUE ""
+# define RESET "" */
+
+/* # define FORK "has taken a fork"
+# define EAT "is eating"
+# define SLEEP "is sleeping"
+# define THINK "is thinking"
+# define DIE "died" */
+
 typedef struct s_rules
 {
 	int				num_philo;

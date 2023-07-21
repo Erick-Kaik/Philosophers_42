@@ -6,7 +6,7 @@
 /*   By: ekaik-ne <ekaik-ne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 10:32:54 by ekaik-ne          #+#    #+#             */
-/*   Updated: 2023/07/19 17:27:37 by ekaik-ne         ###   ########.fr       */
+/*   Updated: 2023/07/21 10:10:15 by ekaik-ne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,19 @@
 # define SLEEP "is sleeping 😴"
 # define THINK "is thinking 🤔"
 # define DIE "died ☠️"
+
+/* # define RED ""
+# define BLUE ""
+# define PURPLE ""
+# define GREEN ""
+# define LIGHT_BLUE ""
+# define RESET "" */
+
+/* # define FORK "has taken a fork"
+# define EAT "is eating"
+# define SLEEP "is sleeping"
+# define THINK "is thinking"
+# define DIE "died" */
 
 typedef struct s_rules
 {
