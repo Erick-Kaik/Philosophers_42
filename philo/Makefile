@@ -12,7 +12,7 @@
 
 NAME = philo
 CC = gcc
-CFLAGS = -g3 -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 SRC = actions.c initialize_values.c ft_atoi.c main.c routine.c utils.c
 OBJSDIR = obj
 OBJS = $(addprefix $(OBJSDIR)/, $(SRC:%.c=%.o))
