@@ -6,7 +6,7 @@
 /*   By: ekaik-ne <ekaik-ne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 14:37:39 by ekaik-ne          #+#    #+#             */
-/*   Updated: 2023/07/21 18:46:32 by ekaik-ne         ###   ########.fr       */
+/*   Updated: 2023/07/26 16:53:32 by ekaik-ne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,11 @@ int	ft_time_to_eat(t_data *data, int act)
 		return (1);
 	data->philos[act].time_to_die = ft_timestamp_ms();
 	usleep(data->rules.time_eat * 1000);
-	data->philos[act].num_time_eat++;
-	data->philos[act].time_to_die = ft_timestamp_ms();
 	if (pthread_mutex_unlock(&data->forks[data->philos[act].l_fork]) != 0)
 		return (1);
 	if (pthread_mutex_unlock(&data->forks[data->philos[act].r_fork]) != 0)
 		return (1);
+	data->philos[act].num_time_eat++;
 	return (0);
 }
 
@@ -52,8 +51,8 @@ int	ft_time_to_think(t_data *data, int act)
 
 int	ft_check_its_dead(t_data *data, int *act)
 {
-	long	timer;
-	int		max;
+	long long	timer;
+	int			max;
 
 	timer = 0;
 	max = data->rules.num_philo;

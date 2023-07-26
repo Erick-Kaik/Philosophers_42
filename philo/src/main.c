@@ -37,6 +37,7 @@ int	ft_philo_init(t_data *data)
 	int	x;
 
 	x = 0;
+	data->philo_dead = 0;
 	data->time_start = ft_timestamp_ms();
 	while (x < data->rules.num_philo)
 	{

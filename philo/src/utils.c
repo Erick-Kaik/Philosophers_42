@@ -25,19 +25,19 @@ int	ft_check_error_size_argc(int args)
 	return (0);
 }
 
-long	ft_timestamp_ms(void)
+long long	ft_timestamp_ms(void)
 {
-	struct timeval	time;
-	long			ms;
+	struct timeval		time;
+	long long			ms;
 
 	gettimeofday(&time, NULL);
-	ms = (time.tv_sec * 1000) + (time.tv_usec / 1000);
+	ms = ((time.tv_sec * 1000) + (time.tv_usec * 0.001));
 	return (ms);
 }
 
 int	ft_print_philo(t_data *data, int id, char *text_print, int type)
 {
-	long	time_now;
+	long long	time_now;
 
 	time_now = ft_timestamp_ms() - data->time_start;
 	if (data->philo_dead == 1)
@@ -49,7 +49,7 @@ int	ft_print_philo(t_data *data, int id, char *text_print, int type)
 		return (1);
 	}
 	ft_get_color(type);
-	printf("%ld	%d	%s%s\n", time_now, id, text_print, RESET);
+	printf("%lld	%d	%s%s\n", time_now, id, text_print, RESET);
 	pthread_mutex_unlock(&data->print);
 	return (0);
 }

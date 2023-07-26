@@ -6,7 +6,7 @@
 /*   By: ekaik-ne <ekaik-ne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 10:28:27 by ekaik-ne          #+#    #+#             */
-/*   Updated: 2023/07/21 10:03:08 by ekaik-ne         ###   ########.fr       */
+/*   Updated: 2023/07/26 11:46:18 by ekaik-ne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	ft_philo_init(t_data *data)
 		}
 		else
 			x++;
-		usleep(100);
+		usleep(1000);
 	}
 	return (0);
 }
@@ -62,12 +62,9 @@ void	ft_routine(t_data *data)
 
 int	ft_exec_rotine(t_data *data, int act)
 {
-	if (ft_time_to_eat(data, act) != 0)
-		return (1);
-	if (ft_time_to_sleep(data, act) != 0)
-		return (1);
-	if (ft_time_to_think(data, act) != 0)
-		return (1);
+	ft_time_to_eat(data, act);
+	ft_time_to_sleep(data, act);
+	ft_time_to_think(data, act);
 	return (0);
 }
 
@@ -78,6 +75,7 @@ void	*ft_checker(void *arg)
 
 	data = (t_data *)arg;
 	act = data->act_philo;
+	usleep(100);
 	if (data->rules.num_philo_eat > 0)
 	{
 		while (data->philo_dead == 0 && data->rules.num_philo_eat

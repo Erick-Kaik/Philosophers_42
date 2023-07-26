@@ -49,6 +49,10 @@ void	ft_destroy_philos(t_data *data)
 	sem_unlink("/print");
 	sem_unlink("/routine");
 	sem_unlink("/dead");
+	data->forks = NULL;
+	data->print = NULL;
+	data->routine = NULL;
+	data->dead = NULL;
 	free(data->philos);
 }
 

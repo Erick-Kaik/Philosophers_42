@@ -6,7 +6,7 @@
 /*   By: ekaik-ne <ekaik-ne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 10:31:18 by ekaik-ne          #+#    #+#             */
-/*   Updated: 2023/07/11 10:05:11 by ekaik-ne         ###   ########.fr       */
+/*   Updated: 2023/07/26 17:22:26 by ekaik-ne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,12 @@ int	ft_generate_struct_philo(t_data *data)
 	data->philos = malloc(sizeof(t_philo) * (data->rules.num_philo + 1));
 	if (data->philos == NULL)
 		return (1);
+	ft_fill_philos(data, x, y);
+	return (0);
+}
+
+void	ft_fill_philos(t_data *data, int x, int y)
+{
 	while (y < data->rules.num_philo)
 	{
 		data->philos[x].id = x + 1;
@@ -75,7 +81,6 @@ int	ft_generate_struct_philo(t_data *data)
 	data->philos[x].time_to_die = 0;
 	data->philos[x].l_fork = x;
 	data->philos[x].r_fork = y;
-	return (0);
 }
 
 int	ft_initialize_mutex_fork(t_data *data)

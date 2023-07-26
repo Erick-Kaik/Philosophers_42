@@ -6,7 +6,7 @@
 /*   By: ekaik-ne <ekaik-ne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 10:32:54 by ekaik-ne          #+#    #+#             */
-/*   Updated: 2023/07/21 10:10:15 by ekaik-ne         ###   ########.fr       */
+/*   Updated: 2023/07/26 17:26:38 by ekaik-ne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # include <unistd.h>
 # include <sys/wait.h>
 
-# define RED "\x1b[38;5;160m"
+/* # define RED "\x1b[38;5;160m"
 # define BLUE "\x1b[38;5;21m"
 # define PURPLE "\x1b[38;5;93m"
 # define GREEN "\x1b[38;5;10m"
@@ -36,36 +36,36 @@
 # define EAT "is eating 🍝"
 # define SLEEP "is sleeping 😴"
 # define THINK "is thinking 🤔"
-# define DIE "died ☠️"
+# define DIE "died ☠️" */
 
-/* # define RED ""
+# define RED ""
 # define BLUE ""
 # define PURPLE ""
 # define GREEN ""
 # define LIGHT_BLUE ""
-# define RESET "" */
+# define RESET ""
 
-/* # define FORK "has taken a fork"
+# define FORK "has taken a fork"
 # define EAT "is eating"
 # define SLEEP "is sleeping"
 # define THINK "is thinking"
-# define DIE "died" */
+# define DIE "died"
 
 typedef struct s_rules
 {
-	int				num_philo;
-	long			time_die;
-	long			time_eat;
-	long			time_sleep;
-	int				num_philo_eat;
+	int		num_philo;
+	long	time_die;
+	long	time_eat;
+	long	time_sleep;
+	int		num_philo_eat;
 }	t_rules;
 
 typedef struct s_philo
 {
 	pid_t		id;
 	int			num_time_eat;
-	long		time_to_die;
-	int			fork;
+	long long	time_to_die;
+	int			eat;
 	pthread_t	philo;
 }	t_philo;
 
@@ -73,7 +73,7 @@ typedef struct s_data
 {
 	int			act_philo;
 	int			philo_dead;
-	long		time_start;
+	long long	time_start;
 	t_rules		rules;
 	t_philo		*philos;
 	pthread_t	checker;
@@ -83,24 +83,24 @@ typedef struct s_data
 	sem_t		*dead;
 }	t_data;
 
-void	ft_pull_args(int argc, char **argv, t_data *data);
-int		ft_check_error_size_argc(int args);
-int		ft_check_args(int argc, char **argv);
-int		ft_initialize_semaphore_fork(t_data *data);
-int		ft_generate_struct_philo(t_data *data);
-long	ft_timestamp_ms(void);
-int		ft_time_to_eat(t_data *data, int act);
-int		ft_time_to_sleep(t_data *data, int act);
-int		ft_time_to_think(t_data *data, int act);
-int		ft_check_its_dead(t_data *data, int act);
-int		ft_philo_init(t_data *data);
-void	ft_routine(t_data *data);
-int		ft_exec_rotine(t_data *data, int act);
-void	*ft_checker(void *arg);
-void	ft_destroy_philos(t_data *data);
-void	ft_unique_philo(t_data *data);
-int		ft_print_philo(t_data *data, pid_t id, char *text_print, int type);
-int		ft_atoi(const char *str);
-void	ft_get_color(int type);
+void		ft_pull_args(int argc, char **argv, t_data *data);
+int			ft_check_error_size_argc(int args);
+int			ft_check_args(int argc, char **argv);
+int			ft_initialize_semaphore_fork(t_data *data);
+int			ft_generate_struct_philo(t_data *data);
+long long	ft_timestamp_ms(void);
+int			ft_time_to_eat(t_data *data, int act);
+int			ft_time_to_sleep(t_data *data, int act);
+int			ft_time_to_think(t_data *data, int act);
+int			ft_check_its_dead(t_data *data, int act);
+int			ft_philo_init(t_data *data);
+void		ft_routine(t_data *data);
+int			ft_exec_rotine(t_data *data, int act);
+void		*ft_checker(void *arg);
+void		ft_destroy_philos(t_data *data);
+void		ft_unique_philo(t_data *data);
+int			ft_print_philo(t_data *data, pid_t id, char *text_print, int type);
+int			ft_atoi(const char *str);
+void		ft_get_color(int type);
 
 #endif

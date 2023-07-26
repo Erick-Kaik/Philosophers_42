@@ -6,7 +6,7 @@
 /*   By: ekaik-ne <ekaik-ne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 11:02:56 by ekaik-ne          #+#    #+#             */
-/*   Updated: 2023/07/19 17:21:14 by ekaik-ne         ###   ########.fr       */
+/*   Updated: 2023/07/26 10:44:26 by ekaik-ne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int	ft_generate_struct_philo(t_data *data)
 		data->philos[x].id = x + 1;
 		data->philos[x].num_time_eat = 0;
 		data->philos[x].time_to_die = 0;
+		data->philos[x].eat = 0;
 		x++;
 	}
 	return (0);
@@ -53,10 +54,10 @@ int	ft_initialize_semaphore_fork(t_data *data)
 	sem_unlink("/print");
 	sem_unlink("/routine");
 	sem_unlink("/dead");
-	data->forks = sem_open("/forks", O_CREAT, 0600, data->rules.num_philo);
-	data->print = sem_open("/print", O_CREAT, 0600, 1);
-	data->routine = sem_open("/routine", O_CREAT, 0600, 1);
-	data->dead = sem_open("/dead", O_CREAT, 0600, 1);
+	data->forks = sem_open("/forks", O_CREAT, 0777, data->rules.num_philo);
+	data->print = sem_open("/print", O_CREAT, 0777, 1);
+	data->routine = sem_open("/routine", O_CREAT, 0777, 1);
+	data->dead = sem_open("/dead", O_CREAT, 0777, 1);
 	if (data->forks == SEM_FAILED || data->print == SEM_FAILED
 		|| data->routine == SEM_FAILED || data->dead == SEM_FAILED)
 		return (1);

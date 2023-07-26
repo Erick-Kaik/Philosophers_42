@@ -6,7 +6,7 @@
 /*   By: ekaik-ne <ekaik-ne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 11:03:51 by ekaik-ne          #+#    #+#             */
-/*   Updated: 2023/07/21 10:02:23 by ekaik-ne         ###   ########.fr       */
+/*   Updated: 2023/07/26 11:36:12 by ekaik-ne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,31 +49,24 @@ int	ft_check_args(int argc, char **argv)
 	return (0);
 }
 
-long	ft_timestamp_ms(void)
+long long	ft_timestamp_ms(void)
 {
 	struct timeval	time;
-	long			ms;
+	long long		ms;
 
 	gettimeofday(&time, NULL);
-	ms = (time.tv_sec * 1000) + (time.tv_usec / 1000);
+	ms = ((time.tv_sec * 1000) + (time.tv_usec * 0.001));
 	return (ms);
 }
 
 int	ft_print_philo(t_data *data, pid_t id, char *text_print, int type)
 {
-	long	time_now;
+	long long	time_now;
 
-	time_now = ft_timestamp_ms() - data->time_start;
-	if (data->philo_dead == 1)
-		return (1);
 	sem_wait(data->print);
-	if (data->philo_dead == 1)
-	{
-		sem_post(data->print);
-		return (1);
-	}
+	time_now = ft_timestamp_ms() - data->time_start;
 	ft_get_color(type);
-	printf("%ld	%d	%s%s\n", time_now, id, text_print, RESET);
+	printf("%lld	%d	%s%s\n", time_now, id, text_print, RESET);
 	sem_post(data->print);
 	return (0);
 }
