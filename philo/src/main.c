@@ -46,11 +46,11 @@ int	ft_philo_init(t_data *data)
 				&ft_rotine, (void *)data) != 0)
 			return (1);
 		x++;
-		usleep(1000);
+		usleep(100);
 	}
 	if (pthread_create(&data->checker, NULL, &ft_checker, (void *)data) != 0)
 		return (1);
-	usleep(1000);
+	usleep(100);
 	if (ft_join_philos(data) != 0)
 		return (1);
 	return (0);

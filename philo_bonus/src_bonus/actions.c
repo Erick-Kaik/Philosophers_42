@@ -6,7 +6,7 @@
 /*   By: ekaik-ne <ekaik-ne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 12:58:02 by ekaik-ne          #+#    #+#             */
-/*   Updated: 2023/07/26 17:25:45 by ekaik-ne         ###   ########.fr       */
+/*   Updated: 2023/07/28 14:44:42 by ekaik-ne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,8 @@ int	ft_time_to_eat(t_data *data, int act)
 	sem_wait(data->forks);
 	ft_print_philo(data, data->philos[act].id, FORK, 1);
 	ft_print_philo(data, data->philos[act].id, EAT, 2);
-	data->philos[act].time_to_die = ft_timestamp_ms() - data->rules.time_eat;
-	usleep(data->rules.time_eat * 1000);
 	data->philos[act].time_to_die = ft_timestamp_ms();
+	usleep(data->rules.time_eat * 1000);
 	sem_post(data->forks);
 	sem_post(data->forks);
 	data->philos[act].num_time_eat++;
@@ -46,20 +45,16 @@ int	ft_check_its_dead(t_data *data, int act)
 	long long		timer;
 
 	timer = 0;
+	usleep(1000);
 	if (data->philos[act].time_to_die > 0)
 		timer = ft_timestamp_ms() - data->philos[act].time_to_die;
-	sem_wait(data->dead);
-	if (data->philos[act].eat == 0)
+	if (timer > data->rules.time_die)
 	{
-		if (timer > data->rules.time_die)
-		{
-			data->philo_dead = 1;
-			ft_print_philo(data, data->philos[act].id, DIE, 5);
-			sem_wait(data->print);
-			sem_post(data->routine);
-			return (1);
-		}
+		data->philo_dead = 1;
+		ft_print_philo(data, data->philos[act].id, DIE, 5);
+		sem_wait(data->print);
+		sem_post(data->routine);
+		return (1);
 	}
-	sem_post(data->dead);
 	return (0);
 }

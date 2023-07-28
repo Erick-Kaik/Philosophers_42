@@ -6,7 +6,7 @@
 /*   By: ekaik-ne <ekaik-ne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 10:28:27 by ekaik-ne          #+#    #+#             */
-/*   Updated: 2023/07/26 11:46:18 by ekaik-ne         ###   ########.fr       */
+/*   Updated: 2023/07/28 14:27:37 by ekaik-ne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,19 +75,23 @@ void	*ft_checker(void *arg)
 
 	data = (t_data *)arg;
 	act = data->act_philo;
-	usleep(100);
 	if (data->rules.num_philo_eat > 0)
 	{
 		while (data->philo_dead == 0 && data->rules.num_philo_eat
 			> data->philos[act].num_time_eat)
+		{
+			sem_wait(data->dead);
 			if (ft_check_its_dead(data, act) != 0)
-				break ;
+				return (NULL);
+			sem_post(data->dead);
+		}
 	}
-	else
+	while (data->philo_dead == 0)
 	{
-		while (data->philo_dead == 0)
-			if (ft_check_its_dead(data, act) != 0)
-				break ;
+		sem_wait(data->dead);
+		if (ft_check_its_dead(data, act) != 0)
+			break ;
+		sem_post(data->dead);
 	}
 	return (NULL);
 }

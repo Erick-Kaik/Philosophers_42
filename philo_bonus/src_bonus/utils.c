@@ -6,7 +6,7 @@
 /*   By: ekaik-ne <ekaik-ne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 11:03:51 by ekaik-ne          #+#    #+#             */
-/*   Updated: 2023/07/26 11:36:12 by ekaik-ne         ###   ########.fr       */
+/*   Updated: 2023/07/28 13:52:17 by ekaik-ne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ int	ft_print_philo(t_data *data, pid_t id, char *text_print, int type)
 {
 	long long	time_now;
 
-	sem_wait(data->print);
 	time_now = ft_timestamp_ms() - data->time_start;
+	sem_wait(data->print);
 	ft_get_color(type);
 	printf("%lld	%d	%s%s\n", time_now, id, text_print, RESET);
 	sem_post(data->print);
