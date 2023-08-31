@@ -35,6 +35,13 @@ long long	ft_timestamp_ms(void)
 	return (ms);
 }
 
+long long	ft_beteween_time(long long time)
+{
+	if (time > 0)
+		return (ft_timestamp_ms() - time);
+	return (0);
+}
+
 int	ft_print_philo(t_data *data, int id, char *text_print, int type)
 {
 	long long	time_now;

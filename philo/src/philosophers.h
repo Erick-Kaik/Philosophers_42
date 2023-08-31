@@ -19,7 +19,7 @@
 # include <pthread.h>
 # include <sys/time.h>
 
-/* # define RED "\x1b[38;5;160m"
+# define RED "\x1b[38;5;160m"
 # define BLUE "\x1b[38;5;21m"
 # define PURPLE "\x1b[38;5;93m"
 # define GREEN "\x1b[38;5;10m"
@@ -30,9 +30,9 @@
 # define EAT "is eating 🍝"
 # define SLEEP "is sleeping 😴"
 # define THINK "is thinking 🤔"
-# define DIE "died ☠️" */
+# define DIE "died ☠️"
 
-# define RED ""
+/* # define RED ""
 # define BLUE ""
 # define PURPLE ""
 # define GREEN ""
@@ -43,7 +43,7 @@
 # define EAT "is eating"
 # define SLEEP "is sleeping"
 # define THINK "is thinking"
-# define DIE "died"
+# define DIE "died" */
 
 typedef struct s_rules
 {
@@ -98,5 +98,6 @@ void		ft_destroy_philos(t_data *data);
 void		ft_unique_philo(t_data *data);
 void		ft_get_color(int type);
 void		ft_fill_philos(t_data *data, int x, int y);
+long long	ft_beteween_time(long long time);
 
 #endif

@@ -42,15 +42,15 @@ int	ft_philo_init(t_data *data)
 	while (x < data->rules.num_philo)
 	{
 		data->act_philo = x;
-		if (pthread_create(&data->philos[x].philo, NULL,
+		if (pthread_create(&data->philos[data->act_philo].philo, NULL,
 				&ft_rotine, (void *)data) != 0)
 			return (1);
+		usleep(1000);
 		x++;
-		usleep(100);
 	}
 	if (pthread_create(&data->checker, NULL, &ft_checker, (void *)data) != 0)
 		return (1);
-	usleep(100);
+	usleep(1000);
 	if (ft_join_philos(data) != 0)
 		return (1);
 	return (0);

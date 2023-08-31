@@ -14,22 +14,46 @@
 
 int	ft_time_to_eat(t_data *data, int act)
 {
-	if (pthread_mutex_lock(&data->forks[data->philos[act].l_fork]) != 0)
-		return (1);
-	if (ft_print_philo(data, data->philos[act].id, FORK, 1) != 0)
-		return (1);
-	if (pthread_mutex_lock(&data->forks[data->philos[act].r_fork]) != 0)
-		return (1);
-	if (ft_print_philo(data, data->philos[act].id, FORK, 1) != 0)
-		return (1);
+	if (data->philos[act].id % 2 == 0)
+	{
+		if (pthread_mutex_lock(&data->forks[data->philos[act].l_fork]) != 0)
+			return (1);
+		if (ft_print_philo(data, data->philos[act].id, FORK, 1) != 0)
+			return (1);
+		if (pthread_mutex_lock(&data->forks[data->philos[act].r_fork]) != 0)
+			return (1);
+		if (ft_print_philo(data, data->philos[act].id, FORK, 1) != 0)
+			return (1);
+	}
+	else 
+	{
+		if (pthread_mutex_lock(&data->forks[data->philos[act].r_fork]) != 0)
+			return (1);
+		if (ft_print_philo(data, data->philos[act].id, FORK, 1) != 0)
+			return (1);
+		if (pthread_mutex_lock(&data->forks[data->philos[act].l_fork]) != 0)
+			return (1);
+		if (ft_print_philo(data, data->philos[act].id, FORK, 1) != 0)
+			return (1);
+	}
 	if (ft_print_philo(data, data->philos[act].id, EAT, 2) != 0)
 		return (1);
 	data->philos[act].time_to_die = ft_timestamp_ms();
 	usleep(data->rules.time_eat * 1000);
-	if (pthread_mutex_unlock(&data->forks[data->philos[act].l_fork]) != 0)
-		return (1);
-	if (pthread_mutex_unlock(&data->forks[data->philos[act].r_fork]) != 0)
-		return (1);
+	if (data->philos[act].id % 2 == 0)
+	{
+		if (pthread_mutex_unlock(&data->forks[data->philos[act].r_fork]) != 0)
+			return (1);
+		if (pthread_mutex_unlock(&data->forks[data->philos[act].l_fork]) != 0)
+			return (1);
+	}
+	else
+	{
+		if (pthread_mutex_unlock(&data->forks[data->philos[act].l_fork]) != 0)
+			return (1);
+		if (pthread_mutex_unlock(&data->forks[data->philos[act].r_fork]) != 0)
+			return (1);
+	}
 	data->philos[act].num_time_eat++;
 	return (0);
 }
@@ -51,13 +75,11 @@ int	ft_time_to_think(t_data *data, int act)
 
 int	ft_check_its_dead(t_data *data, int *act)
 {
-	long long	timer;
-	int			max;
+	int	timer;
 
-	timer = 0;
-	max = data->rules.num_philo;
-	if (data->philos[*act].time_to_die > 0)
-		timer = ft_timestamp_ms() - data->philos[*act].time_to_die;
+	if (*act == data->rules.num_philo)
+		*act = 0;
+	timer = ft_beteween_time(data->philos[*act].time_to_die);
 	usleep(1);
 	if (timer > data->rules.time_die)
 	{
@@ -66,7 +88,5 @@ int	ft_check_its_dead(t_data *data, int *act)
 		return (1);
 	}
 	*act += 1;
-	if (*act == max)
-		*act = 0;
 	return (0);
 }
