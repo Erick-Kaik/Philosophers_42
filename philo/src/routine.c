@@ -6,7 +6,7 @@
 /*   By: ekaik-ne <ekaik-ne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 14:37:42 by ekaik-ne          #+#    #+#             */
-/*   Updated: 2023/07/26 15:41:08 by ekaik-ne         ###   ########.fr       */
+/*   Updated: 2023/08/01 15:20:40 by ekaik-ne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,10 @@ int	ft_exec_rotine(t_data *data, int act)
 {
 	if (ft_time_to_eat(data, act) != 0)
 		return (1);
-	if (data->rules.num_philo_eat != data->philos[act].num_time_eat)
-	{
-		if (ft_time_to_sleep(data, act) != 0)
-			return (1);
-		if (ft_time_to_think(data, act) != 0)
-			return (1);
-	}
+	if (ft_time_to_sleep(data, act) != 0)
+		return (1);
+	if (ft_time_to_think(data, act) != 0)
+		return (1);
 	return (0);
 }
 

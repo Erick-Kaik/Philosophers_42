@@ -6,7 +6,7 @@
 /*   By: ekaik-ne <ekaik-ne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 11:02:56 by ekaik-ne          #+#    #+#             */
-/*   Updated: 2023/07/26 10:44:26 by ekaik-ne         ###   ########.fr       */
+/*   Updated: 2023/08/01 15:48:08 by ekaik-ne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ int	ft_generate_struct_philo(t_data *data)
 		data->philos[x].id = x + 1;
 		data->philos[x].num_time_eat = 0;
 		data->philos[x].time_to_die = 0;
-		data->philos[x].eat = 0;
 		x++;
 	}
 	return (0);

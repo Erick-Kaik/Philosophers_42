@@ -6,7 +6,7 @@
 /*   By: ekaik-ne <ekaik-ne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 10:32:54 by ekaik-ne          #+#    #+#             */
-/*   Updated: 2023/07/28 14:11:11 by ekaik-ne         ###   ########.fr       */
+/*   Updated: 2023/08/01 15:48:23 by ekaik-ne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ typedef struct s_philo
 	pid_t		id;
 	int			num_time_eat;
 	long long	time_to_die;
-	int			eat;
 	pthread_t	philo;
 }	t_philo;
 
