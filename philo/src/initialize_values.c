@@ -12,92 +12,98 @@
 
 #include "philosophers.h"
 
-int	ft_check_args(int argc, char **argv)
+int	ft_init(t_philo **philo, t_data **data, int argc, char **argv)
 {
-	int	x;
-	int	arg;
-
-	arg = 1;
-	while (arg < argc)
-	{
-		x = 0;
-		while (argv[arg][x] != '\0')
-		{
-			if (argv[arg][x] < '0' || argv[arg][x] > '9')
-			{
-				printf("argument '%s' is invalid, accept only numbers\n",
-					argv[arg]);
-				return (1);
-			}
-			x++;
-		}
-		arg++;
-	}
-	return (0);
+	*data = (t_data *)malloc (sizeof (t_data));
+	if (*data == NULL)
+		return (FAILURE);
+	(*data)->mutex = NULL;
+	if (ft_init_data(data, argc, argv) == FAILURE)
+		return (FAILURE);
+	*philo = (t_philo *)malloc(sizeof (t_philo) * (size_t)(*data)->philo_nb);
+	if (*philo == NULL)
+		return (FAILURE);
+	(*philo)->fork = NULL;
+	if (ft_init_philo(philo, *data) == FAILURE)
+		return (FAILURE);
+	return (SUCCESS);
 }
 
-void	ft_pull_args(int argc, char **argv, t_data *data)
+int	ft_init_data(t_data **data, int argc, char **argv)
 {
-	data->rules.num_philo = ft_atoi(argv[1]);
-	data->rules.time_die = ft_atoi(argv[2]);
-	data->rules.time_eat = ft_atoi(argv[3]);
-	data->rules.time_sleep = ft_atoi(argv[4]);
+	(*data)->simbegin = ft_time_now();
+	(*data)->philo_nb = ft_atoi(argv[1]);
+	(*data)->time_die = ft_atoi(argv[2]);
+	(*data)->time_eat = ft_atoi(argv[3]);
+	(*data)->time_slp = ft_atoi(argv[4]);
+	(*data)->time_thk = 0;
+	if (((*data)->philo_nb % 2) && ((*data)->time_eat > (*data)->time_slp))
+		(*data)->time_thk = 1 + ((*data)->time_eat - (*data)->time_slp);
+	if (argc == 5)
+		(*data)->must_eat = -1;
 	if (argc == 6)
-		data->rules.num_philo_eat = ft_atoi(argv[5]);
-	else
-		data->rules.num_philo_eat = -1;
-	data->philo_dead = 0;
+		(*data)->must_eat = ft_atoi(argv[5]);
+	(*data)->done = FALSE;
+	(*data)->died = FALSE;
+	if (ft_init_mutex(data))
+		return (FAILURE);
+	return (SUCCESS);
 }
 
-int	ft_generate_struct_philo(t_data *data)
+int	ft_init_philo(t_philo **philo, t_data *data)
 {
-	int	x;
-	int	y;
+	pthread_mutex_t	*fork;
+	int				i;
 
-	x = 0;
-	y = 1;
-	data->philos = malloc(sizeof(t_philo) * (data->rules.num_philo + 1));
-	if (data->philos == NULL)
-		return (1);
-	ft_fill_philos(data, x, y);
-	return (0);
-}
-
-void	ft_fill_philos(t_data *data, int x, int y)
-{
-	while (y < data->rules.num_philo)
+	fork = malloc(sizeof (pthread_mutex_t) * ((size_t)data->philo_nb));
+	if (fork == NULL)
+		return (FAILURE);
+	i = 0;
+	while (i < data->philo_nb)
+		pthread_mutex_init(&fork[i++], NULL);
+	i = 0;
+	while (i < data->philo_nb)
 	{
-		data->philos[x].id = x + 1;
-		data->philos[x].num_time_eat = 0;
-		data->philos[x].time_to_die = 0;
-		data->philos[x].l_fork = x;
-		data->philos[x].r_fork = y;
-		x++;
-		y++;
+		(*philo)[i].id = i + 1;
+		(*philo)[i].last_meal = data->simbegin;
+		(*philo)[i].meals_counter = 0;
+		(*philo)[i].lfork = i;
+		if (i - 1 < 0)
+			(*philo)[i].rfork = data->philo_nb - 1;
+		else
+			(*philo)[i].rfork = i - 1;
+		(*philo)[i].fork = fork;
+		(*philo)[i].data = data;
+		i++;
 	}
-	y = 0;
-	data->philos[x].id = x + 1;
-	data->philos[x].num_time_eat = 0;
-	data->philos[x].time_to_die = 0;
-	data->philos[x].l_fork = x;
-	data->philos[x].r_fork = y;
+	return (SUCCESS);
 }
 
-int	ft_initialize_mutex_fork(t_data *data)
+int	ft_init_mutex(t_data **data)
 {
-	int	x;
+	pthread_mutex_t	*mutex;
+	int				i;
 
-	x = 0;
-	data->forks = malloc(sizeof(pthread_mutex_t) * data->rules.num_philo + 1);
-	if (data->forks == NULL)
-		return (1);
-	while (x < data->rules.num_philo)
-	{
-		if (pthread_mutex_init(&data->forks[x], NULL) != 0)
-			return (1);
-		x++;
-	}
-	if (pthread_mutex_init(&data->print, NULL) != 0)
-		return (1);
-	return (0);
+	mutex = malloc(sizeof (pthread_mutex_t) * ((size_t)M_NUM));
+	if (mutex == NULL)
+		return (FAILURE);
+	i = 0;
+	while (i < M_NUM)
+		pthread_mutex_init(&mutex[i++], NULL);
+	(*data)->mutex = mutex;
+	return (SUCCESS);
+}
+
+int	ft_destroy_mutexes(t_philo *philo, t_data *data, pthread_t *th, int ret)
+{
+	int	i;
+
+	i = 0;
+	while (i < philo->data->philo_nb)
+		pthread_mutex_destroy (&philo->fork[i++]);
+	i = 0;
+	while (i < M_NUM)
+		pthread_mutex_destroy (&data->mutex[i++]);
+	free(th);
+	return (ret);
 }

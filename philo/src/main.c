@@ -14,67 +14,17 @@
 
 int	main(int argc, char **argv)
 {
-	t_data	data;
+	t_data	*data;
+	t_philo	*philo;
 
-	if (ft_check_error_size_argc(argc) == 1 || ft_check_args(argc, argv) == 1)
-		return (1);
-	ft_pull_args(argc, argv, &data);
-	if (ft_generate_struct_philo(&data) == 1)
-		return (1);
-	if (ft_initialize_mutex_fork(&data) == 1)
-		return (1);
-	if (data.rules.num_philo <= 1)
-		ft_unique_philo(&data);
-	else
-		if (ft_philo_init(&data) == 1)
-			return (1);
-	ft_destroy_philos(&data);
-	return (0);
-}
-
-int	ft_philo_init(t_data *data)
-{
-	int	x;
-
-	x = 0;
-	data->philo_dead = 0;
-	data->time_start = ft_timestamp_ms();
-	while (x < data->rules.num_philo)
-	{
-		data->act_philo = x;
-		if (pthread_create(&data->philos[data->act_philo].philo, NULL,
-				&ft_rotine, (void *)data) != 0)
-			return (1);
-		usleep(1000);
-		x++;
-	}
-	if (pthread_create(&data->checker, NULL, &ft_checker, (void *)data) != 0)
-		return (1);
-	usleep(1000);
-	if (ft_join_philos(data) != 0)
-		return (1);
-	return (0);
-}
-
-void	ft_destroy_philos(t_data *data)
-{
-	int	x;
-
-	x = 0;
-	while (x < data->rules.num_philo)
-	{
-		pthread_mutex_destroy(&data->forks[x]);
-		x++;
-	}
-	pthread_mutex_destroy(&data->print);
-	free(data->philos);
-	free(data->forks);
-}
-
-void	ft_unique_philo(t_data *data)
-{
-	data->time_start = ft_timestamp_ms();
-	ft_print_philo(data, 1, FORK, 1);
-	usleep((data->rules.time_die * 1000));
-	ft_print_philo(data, 1, DIE, 5);
+	data = NULL;
+	philo = NULL;
+	if (ft_check_error_size_argc(argc) == FAILURE || ft_check_args(argc,
+			argv) == FAILURE)
+		return (ft_clear_all(philo, data, EXIT_FAILURE));
+	if (ft_init(&philo, &data, argc, argv) == FAILURE)
+		return (ft_clear_all(philo, data, EXIT_FAILURE));
+	if (ft_simulator(philo, data) == SUCCESS)
+		return (ft_clear_all(philo, data, EXIT_FAILURE));
+	return (ft_clear_all(philo, data, EXIT_SUCCESS));
 }

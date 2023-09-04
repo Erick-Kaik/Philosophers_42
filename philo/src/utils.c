@@ -20,57 +20,75 @@ int	ft_check_error_size_argc(int args)
 		printf("_of_philosophers,\ntime_to_die(ms),\ntime_to_eat(ms),\n");
 		printf("time_to_sleep(ms),\nnumber_of_times_each_philosopher_must_eat");
 		printf("(optional argument)\n");
-		return (1);
+		return (FAILURE);
 	}
-	return (0);
+	return (SUCCESS);
 }
 
-long long	ft_timestamp_ms(void)
+int	ft_check_args(int argc, char **argv)
 {
-	struct timeval		time;
-	long long			ms;
+	int	x;
+	int	arg;
+
+	arg = 1;
+	while (arg < argc)
+	{
+		x = 0;
+		while (argv[arg][x] != '\0')
+		{
+			if (argv[arg][x] < '0' || argv[arg][x] > '9')
+			{
+				printf("argument '%s' is invalid, accept only numbers\n",
+					argv[arg]);
+				return (FAILURE);
+			}
+			x++;
+		}
+		arg++;
+	}
+	if (ft_check_values(argc, argv) == FAILURE)
+		return (FAILURE);
+	return (SUCCESS);
+}
+
+int	ft_check_values(int argc, char **argv)
+{
+	int	x;
+
+	x = 1;
+	if (argc == 6 && ft_atoi(argv[5]) == 0)
+		return (FAILURE);
+	if (ft_atoi(argv[1]) == 0)
+		return (FAILURE);
+	while (x < argc)
+	{
+		if (ft_atoi(argv[x]) > INT_MAX || ft_atoi(argv[x]) < 0)
+		{
+			printf("Error: argument '%s' out of range value.\n", argv[x]);
+			return (FAILURE);
+		}
+		x++;
+	}
+	return (SUCCESS);
+}
+
+int	ft_clear_all(t_philo *philo, t_data *data, int ret)
+{
+	if (data && data->mutex)
+		free (data->mutex);
+	if (data)
+		free (data);
+	if (philo && philo->fork)
+		free (philo->fork);
+	if (philo)
+		free (philo);
+	return (ret);
+}
+
+unsigned long	ft_time_now(void)
+{
+	struct timeval	time;
 
 	gettimeofday(&time, NULL);
-	ms = ((time.tv_sec * 1000) + (time.tv_usec * 0.001));
-	return (ms);
-}
-
-long long	ft_beteween_time(long long time)
-{
-	if (time > 0)
-		return (ft_timestamp_ms() - time);
-	return (0);
-}
-
-int	ft_print_philo(t_data *data, int id, char *text_print, int type)
-{
-	long long	time_now;
-
-	time_now = ft_timestamp_ms() - data->time_start;
-	if (data->philo_dead == 1)
-		return (1);
-	pthread_mutex_lock(&data->print);
-	if (data->philo_dead == 1)
-	{
-		pthread_mutex_unlock(&data->print);
-		return (1);
-	}
-	ft_get_color(type);
-	printf("%lld	%d	%s%s\n", time_now, id, text_print, RESET);
-	pthread_mutex_unlock(&data->print);
-	return (0);
-}
-
-void	ft_get_color(int type)
-{
-	if (type == 1)
-		printf("%s", BLUE);
-	else if (type == 2)
-		printf("%s", GREEN);
-	else if (type == 3)
-		printf("%s", PURPLE);
-	else if (type == 4)
-		printf("%s", LIGHT_BLUE);
-	else
-		printf("%s", RED);
+	return ((time.tv_sec * 1000) + (time.tv_usec * 0.001));
 }

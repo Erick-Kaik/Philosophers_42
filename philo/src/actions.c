@@ -12,81 +12,83 @@
 
 #include "philosophers.h"
 
-int	ft_time_to_eat(t_data *data, int act)
+void	ft_died(t_data *data)
 {
-	if (data->philos[act].id % 2 == 0)
+	pthread_mutex_lock(&data->mutex[DIED]);
+	data->died = TRUE;
+	pthread_mutex_unlock(&data->mutex[DIED]);
+}
+
+int	ft_eating(t_philo *philo)
+{
+	if (ft_start_eating(philo) == FAILURE)
+		return (FAILURE);
+	pthread_mutex_lock(&philo->data->mutex[MEALS]);
+	philo->last_meal = ft_time_now();
+	philo->meals_counter++;
+	pthread_mutex_unlock(&philo->data->mutex[MEALS]);
+	if (ft_check_done(philo))
 	{
-		if (pthread_mutex_lock(&data->forks[data->philos[act].l_fork]) != 0)
-			return (1);
-		if (ft_print_philo(data, data->philos[act].id, FORK, 1) != 0)
-			return (1);
-		if (pthread_mutex_lock(&data->forks[data->philos[act].r_fork]) != 0)
-			return (1);
-		if (ft_print_philo(data, data->philos[act].id, FORK, 1) != 0)
-			return (1);
+		ft_finish_eating(philo);
+		return (FAILURE);
 	}
-	else 
-	{
-		if (pthread_mutex_lock(&data->forks[data->philos[act].r_fork]) != 0)
-			return (1);
-		if (ft_print_philo(data, data->philos[act].id, FORK, 1) != 0)
-			return (1);
-		if (pthread_mutex_lock(&data->forks[data->philos[act].l_fork]) != 0)
-			return (1);
-		if (ft_print_philo(data, data->philos[act].id, FORK, 1) != 0)
-			return (1);
-	}
-	if (ft_print_philo(data, data->philos[act].id, EAT, 2) != 0)
-		return (1);
-	data->philos[act].time_to_die = ft_timestamp_ms();
-	usleep(data->rules.time_eat * 1000);
-	if (data->philos[act].id % 2 == 0)
-	{
-		if (pthread_mutex_unlock(&data->forks[data->philos[act].r_fork]) != 0)
-			return (1);
-		if (pthread_mutex_unlock(&data->forks[data->philos[act].l_fork]) != 0)
-			return (1);
-	}
+	ft_fraction_sleep((unsigned long)philo->data->time_eat);
+	ft_finish_eating(philo);
+	return (SUCCESS);
+}
+
+int	ft_start_eating(t_philo *philo)
+{
+	int	min;
+	int	max;
+
+	if (philo->lfork < philo->rfork)
+		min = philo->lfork;
 	else
+		min = philo->rfork;
+	if (philo->rfork > philo->lfork)
+		max = philo->rfork;
+	else
+		max = philo->lfork;
+	pthread_mutex_lock(&philo->fork[min]);
+	ft_print(philo, FORK, 1);
+	if (philo->lfork == philo->rfork)
 	{
-		if (pthread_mutex_unlock(&data->forks[data->philos[act].l_fork]) != 0)
-			return (1);
-		if (pthread_mutex_unlock(&data->forks[data->philos[act].r_fork]) != 0)
-			return (1);
+		pthread_mutex_unlock(&philo->fork[min]);
+		return (FAILURE);
 	}
-	data->philos[act].num_time_eat++;
-	return (0);
+	pthread_mutex_lock(&philo->fork[max]);
+	ft_print (philo, FORK, 1);
+	ft_print (philo, EAT, 2);
+	return (SUCCESS);
 }
 
-int	ft_time_to_sleep(t_data *data, int act)
+int	ft_finish(t_philo *philo, t_data *data)
 {
-	if (ft_print_philo(data, data->philos[act].id, SLEEP, 3) != 0)
-		return (1);
-	usleep(data->rules.time_sleep * 1000);
-	return (0);
-}
+	int	i;
+	int	done;
+	int	meals_count;
 
-int	ft_time_to_think(t_data *data, int act)
-{
-	if (ft_print_philo(data, data->philos[act].id, THINK, 4) != 0)
-		return (1);
-	return (0);
-}
-
-int	ft_check_its_dead(t_data *data, int *act)
-{
-	int	timer;
-
-	if (*act == data->rules.num_philo)
-		*act = 0;
-	timer = ft_beteween_time(data->philos[*act].time_to_die);
-	usleep(1);
-	if (timer > data->rules.time_die)
+	if (data->must_eat == -1)
+		return (FALSE);
+	i = -1;
+	done = -1;
+	while (++i < data->philo_nb)
 	{
-		ft_print_philo(data, data->philos[*act].id, DIE, 5);
-		data->philo_dead = 1;
-		return (1);
+		pthread_mutex_lock (&philo->data->mutex[MEALS]);
+		meals_count = philo[i].meals_counter;
+		pthread_mutex_unlock (&philo->data->mutex[MEALS]);
+		if (meals_count >= data->must_eat)
+			if (++done == data->philo_nb - 1)
+				return (TRUE);
+		usleep(50);
 	}
-	*act += 1;
-	return (0);
+	return (FALSE);
+}
+
+void	ft_done(t_data *data)
+{
+	pthread_mutex_lock (&data->mutex[DONE]);
+	data->done = TRUE;
+	pthread_mutex_unlock (&data->mutex[DONE]);
 }

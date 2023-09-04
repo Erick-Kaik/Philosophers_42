@@ -13,11 +13,13 @@
 #ifndef PHILOSOPHERS_H
 # define PHILOSOPHERS_H
 
-# include <stdio.h>
-# include <unistd.h>
-# include <stdlib.h>
 # include <pthread.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <string.h>
 # include <sys/time.h>
+# include <unistd.h>
+# include <limits.h>
 
 # define RED "\x1b[38;5;160m"
 # define BLUE "\x1b[38;5;21m"
@@ -32,72 +34,80 @@
 # define THINK "is thinking 🤔"
 # define DIE "died ☠️"
 
-/* # define RED ""
-# define BLUE ""
-# define PURPLE ""
-# define GREEN ""
-# define LIGHT_BLUE ""
-# define RESET ""
-
-# define FORK "has taken a fork"
-# define EAT "is eating"
-# define SLEEP "is sleeping"
-# define THINK "is thinking"
-# define DIE "died" */
-
-typedef struct s_rules
+typedef enum e_exit
 {
-	int				num_philo;
-	long			time_die;
-	long			time_eat;
-	long			time_sleep;
-	int				num_philo_eat;
-}	t_rules;
+	SUCCESS,
+	FAILURE
+}	t_exit;
 
-typedef struct s_philo
+typedef enum e_bool
 {
-	int			id;
-	int			num_time_eat;
-	long long	time_to_die;
-	int			l_fork;
-	int			r_fork;
-	pthread_t	philo;
-}	t_philo;
+	FALSE,
+	TRUE
+}	t_bool;
+
+typedef enum e_mutexes
+{
+	PRINT,
+	MEALS,
+	DONE,
+	DIED,
+	M_NUM
+}	t_mutexes;
 
 typedef struct s_data
 {
-	int				act_philo;
-	int				philo_dead;
-	long long		time_start;
-	t_rules			rules;
-	t_philo			*philos;
-	pthread_t		checker;
-	pthread_mutex_t	print;
-	pthread_mutex_t	*forks;
+	int					philo_nb;
+	int					time_die;
+	int					time_eat;
+	int					time_slp;
+	int					must_eat;
+	int					time_thk;
+	unsigned long		simbegin;
+	int					done;
+	int					died;
+	pthread_mutex_t		*mutex;
+
 }	t_data;
 
-int			main(int argc, char **argv);
-int			ft_atoi(const char *str);
-int			ft_philo_init(t_data *data);
-int			ft_check_error_size_argc(int args);
-int			ft_check_args(int argc, char **argv);
-void		ft_pull_args(int argc, char **argv, t_data *data);
-int			ft_generate_struct_philo(t_data *data);
-int			ft_initialize_mutex_fork(t_data *data);
-void		*ft_rotine(void *arg);
-int			ft_exec_rotine(t_data *data, int act);
-long long	ft_timestamp_ms(void);
-int			ft_print_philo(t_data *data, int id, char *text_print, int type);
-int			ft_time_to_eat(t_data *data, int act);
-int			ft_time_to_sleep(t_data *data, int act);
-int			ft_time_to_think(t_data *data, int act);
-int			ft_check_its_dead(t_data *data, int *act);
-void		*ft_checker(void *arg);
-int			ft_join_philos(t_data *data);
-void		ft_destroy_philos(t_data *data);
-void		ft_unique_philo(t_data *data);
-void		ft_get_color(int type);
-void		ft_fill_philos(t_data *data, int x, int y);
-long long	ft_beteween_time(long long time);
+typedef struct s_philo
+{
+	int					id;
+	unsigned long		last_meal;
+	int					meals_counter;
+	int					lfork;
+	int					rfork;
+	pthread_mutex_t		*fork;
+	t_data				*data;
+
+}	t_philo;
+
+int				ft_atoi(const char *str);
+int				ft_clear_all(t_philo *philo, t_data *data, int ret);
+int				ft_destroy_mutexes(t_philo *philo, t_data *data, pthread_t *th,
+					int ret);
+int				ft_check_args(int argc, char **argv);
+int				ft_check_error_size_argc(int args);
+int				ft_check_values(int argc, char **argv);
+int				ft_init(t_philo **philo, t_data **data, int argc, char **argv);
+int				ft_init_data(t_data **data, int argc, char **argv);
+int				ft_init_philo(t_philo **philo, t_data *data);
+int				ft_init_mutex(t_data **data);
+unsigned long	ft_time_now(void);
+unsigned long	ft_timer(unsigned long time);
+void			ft_get_color(int type);
+void			ft_print(t_philo *philo, char *act, int type);
+int				ft_check_died(t_philo *philo);
+int				ft_simulator(t_philo *philo, t_data *data);
+void			*ft_routine(void *data);
+int				ft_checker(t_philo *philo, t_data *data);
+void			ft_died(t_data *data);
+int				ft_start_eating(t_philo *philo);
+int				ft_check_done(t_philo *philo);
+void			ft_done(t_data *data);
+int				ft_finish_eating(t_philo *philo);
+int				ft_finish(t_philo *philo, t_data *data);
+int				ft_eating(t_philo *philo);
+void			ft_fraction_sleep(unsigned long timer);
 
 #endif

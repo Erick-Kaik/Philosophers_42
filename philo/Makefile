@@ -13,7 +13,7 @@
 NAME = philo
 CC = gcc
 CFLAGS = -g3 -Wall -Wextra -Werror
-SRC = actions.c initialize_values.c ft_atoi.c main.c routine.c utils.c
+SRC = actions.c initialize_values.c ft_atoi.c main.c routine.c utils.c utils_actions.c utils_more.c
 OBJSDIR = obj
 OBJS = $(addprefix $(OBJSDIR)/, $(SRC:%.c=%.o))
 .PHONY = all clean fclean re
